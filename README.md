@@ -40,5 +40,5 @@ Then run:
 
 ## To test Application
 
-http://167.86.91.233:9922/
+    http://167.86.91.233:9922/
 
