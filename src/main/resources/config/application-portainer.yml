@@ -88,5 +88,5 @@ server:
 
 seaevent:
   app:
-    jwtSecret: seaEventSecretJwtKey
+    jwtSecret: socialMonitoringNetworkSecretJwtKey
     jwtExpirationMs: 86400000

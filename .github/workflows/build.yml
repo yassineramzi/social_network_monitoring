@@ -44,21 +44,3 @@ jobs:
       - name: Build application Backend
         run:  |
           mvn clean compile jib:build -Dmode=portainer
-      - name: Send mail
-        if: always()
-        uses: dawidd6/action-send-mail@v2
-        with:
-          # mail server settings
-          server_address: smtp.gmail.com
-          server_port: 465
-          # user credentials
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          # email subject
-          subject: ${{ github.job }} job of ${{ github.repository }} status is ${{ job.status }}
-          # email body as text
-          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} status is ${{ job.status }}
-          # comma-separated string, send email to
-          to: yassine.ramzi2010@gmail.com,
-          # from email name
-          from: Chock team Github

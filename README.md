@@ -38,7 +38,7 @@ Then run:
 
     docker-compose -f src/main/docker/app.yml up -d
 
-## TO TEST Application
+## To test Application
 
-http://167.86.91.233:8183/
+http://167.86.91.233:9922/
 
