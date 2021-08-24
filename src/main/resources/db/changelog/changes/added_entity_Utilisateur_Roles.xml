@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <!--
+        Added the entity utilisateur_roles.
+    -->
+    <changeSet id="3" author="">
+        <createTable tableName="utilisateur_roles">
+            <column name="utilisateur_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="roles_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Load data on utilisateur_roles -->
+    <changeSet id="2021_08_24_12_51" author="">
+        <loadData
+                file="db/changelog/data/utilisateur_roles.csv"
+                separator=";"
+                tableName="utilisateur_roles">
+            <column name="utilisateur_id" type="numeric"/>
+            <column name="roles_id" type="numeric"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>
