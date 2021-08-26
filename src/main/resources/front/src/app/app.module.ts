@@ -53,7 +53,6 @@ import { HttpClientModule } from '@angular/common/http';
     NgbTooltipModule,
     NgbButtonsModule,
     NgbTabsetModule,
-    FormsModule,
     HttpClientModule
   ],
   providers: [NavigationItem, authInterceptorProviders],
