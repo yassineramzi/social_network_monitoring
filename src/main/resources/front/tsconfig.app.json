@@ -8,6 +8,7 @@
     "paths": {
       "@theme/*"                  : ["app/theme/*"],
       "@pages/*"                  : ["app/pages/*"],
+      "@containers/*"             : ["app/containers/*"],
       "@modals/*"                 : ["app/modals/*"],
       "@onglets/*"                : ["app/onglets/*"],
       "@models/*"                 : ["app/models/*"],

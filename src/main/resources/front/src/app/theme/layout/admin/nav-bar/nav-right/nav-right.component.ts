@@ -2,6 +2,8 @@ import {Component, DoCheck, OnInit} from '@angular/core';
 import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {GradientConfig} from '../../../../../app-config';
+import { AuthService } from '@services/auth.service';
+import { TokenStorageService } from '@services/token-storage.service';
 
 @Component({
   selector: 'app-nav-right',
@@ -30,18 +32,23 @@ import {GradientConfig} from '../../../../../app-config';
   ]
 })
 export class NavRightComponent implements OnInit, DoCheck {
-  public visibleUserList: boolean;
-  public chatMessage: boolean;
-  public friendId: boolean;
   public gradientConfig: any;
+  public login: string;
 
-  constructor() {
-    this.visibleUserList = false;
-    this.chatMessage = false;
+  constructor(
+    protected authService: AuthService,
+    protected tokenStorageService: TokenStorageService
+    ) {
     this.gradientConfig = GradientConfig.config;
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.login = this.tokenStorageService.getUser().username;
+  }
+
+  logout(): void {
+    this.authService.logout();
+  }
 
   ngDoCheck() {
     if (document.querySelector('body').classList.contains('elite-rtl')) {
