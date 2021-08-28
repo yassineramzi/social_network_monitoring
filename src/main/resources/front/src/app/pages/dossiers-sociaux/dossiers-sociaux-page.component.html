@@ -1,6 +1,13 @@
 <app-card>
         <div class="row p-2">
           <div class="col-md-12">
+            <button class="btn btn-primary float-right" (click)="openModal()">
+              Ajouter un dossier
+            </button>
+          </div>
+        </div>
+        <div class="row p-2">
+          <div class="col-md-12">
               <div class="table-responsive">
                 <table id="table" class="table table-centered table-hover mb-0">
                   <thead>
@@ -13,8 +20,17 @@
                   </thead>
                   <tbody>
                     <tr *ngIf="dossiersArrayPage.length === 0">
-                      <td colspan="6">
+                      <td colspan="4">
                         <span class="d-flex justify-content-center">Aucun dossier disponible</span>
+                      </td>
+                    </tr>
+                    <tr *ngFor="let dossier of dossiersArrayPage">
+                      <td>{{dossier.nom}}</td>
+                      <td>{{dossier.profils.length}}</td>
+                      <td>{{categories[dossier.categorie]}}</td>
+                      <td>
+                        <i class="feather icon-edit-2 mr-1" (click)="editDossier(dossier.id)"></i>
+                        <i class="feather icon-trash-2" (click)="deleteDossier(dossier.id)"></i>
                       </td>
                     </tr>
                   </tbody>

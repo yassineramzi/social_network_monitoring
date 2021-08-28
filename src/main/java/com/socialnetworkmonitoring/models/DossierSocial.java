@@ -19,7 +19,7 @@ public class DossierSocial implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="nom")
+    @Column(name="nom", unique = true)
     private String nom;
 
     @Enumerated(EnumType.STRING)

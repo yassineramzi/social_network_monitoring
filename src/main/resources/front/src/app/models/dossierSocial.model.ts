@@ -5,7 +5,7 @@ export class DossierSocial {
     public id: number;
     public nom: string;
     public categorie: ECategorie;
-    public profils: Array<Profil>;
+    public profils: Array<Profil> = new Array<Profil>(0);
 
     constructor(
         nom: string, 

@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DossierSocialRepository extends JpaRepository<DossierSocial, Long> {
+    Boolean existsByNom(String nom);
+
+    Boolean existsByNomAndIdIsNot(String nom, Long id);
 }

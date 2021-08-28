@@ -1,11 +1,16 @@
 package com.socialnetworkmonitoring.service;
 
+import com.socialnetworkmonitoring.exceptions.EntityAlreadyExistException;
 import com.socialnetworkmonitoring.service.dto.DossierSocialDTO;
 
-public interface DossierSocialService {
-    DossierSocialDTO create(DossierSocialDTO dossierSocialDTO);
+import java.util.List;
 
-    DossierSocialDTO update(DossierSocialDTO dossierSocialDTO);
+public interface DossierSocialService {
+    DossierSocialDTO create(DossierSocialDTO dossierSocialDTO) throws EntityAlreadyExistException;
+
+    DossierSocialDTO update(DossierSocialDTO dossierSocialDTO) throws EntityAlreadyExistException;
 
     void delete(Long idDossierSocial);
+
+    List<DossierSocialDTO> findAll();
 }

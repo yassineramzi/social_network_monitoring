@@ -22,11 +22,14 @@ import { ToggleFullScreenDirective } from './theme/shared/full-screen/toggle-ful
 
 /* Menu Items */
 import { NavigationItem } from './theme/layout/admin/navigation/navigation';
-import { NgbButtonsModule, NgbDropdownModule, NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbButtonsModule, NgbDropdownModule, NgbModule, NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { authInterceptorProviders } from "@services/auth.interceptor";
-import { FormsModule } from '@angular/forms';
+import { authInterceptorProviders } from '@services/auth.interceptor';
 import { HttpClientModule } from '@angular/common/http';
+
+import { ConfirmationPopupModule } from '@modals/confirmationPopup/confirmationPopup.module';
+import { ToastsContainer } from '@containers/toasts-container.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +45,8 @@ import { HttpClientModule } from '@angular/common/http';
     NavSearchComponent,
     NavRightComponent,
     ConfigurationComponent,
-    ToggleFullScreenDirective
+    ToggleFullScreenDirective,
+    ToastsContainer
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,12 @@ import { HttpClientModule } from '@angular/common/http';
     NgbTooltipModule,
     NgbButtonsModule,
     NgbTabsetModule,
-    HttpClientModule
+    HttpClientModule,
+    ConfirmationPopupModule,
+    NgbModule
+  ],
+  exports : [
+    ToastsContainer
   ],
   providers: [NavigationItem, authInterceptorProviders],
   bootstrap: [AppComponent]

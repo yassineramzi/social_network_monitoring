@@ -19,7 +19,6 @@ Then run:
 
     java -jar target/socialnetworkmonitoring-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev
     
-
 ## Using Docker to simplify development (optional)
 
 Go to :
