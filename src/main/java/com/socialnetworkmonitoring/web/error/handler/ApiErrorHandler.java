@@ -1,6 +1,5 @@
 package com.socialnetworkmonitoring.web.error.handler;
 
-
 import com.socialnetworkmonitoring.exceptions.EntityAlreadyExistException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,16 +15,16 @@ import com.socialnetworkmonitoring.web.error.ApiException;
 public class ApiErrorHandler extends ResponseEntityExceptionHandler
 {
 	@ExceptionHandler({ ApiException.class })
-	public ResponseEntity<Object> handleCompilatioError(final ApiException apiException)
+	public ResponseEntity<Object> handleApiException(final ApiException apiException)
 	{
-		ApiError apiError = getErrorApiFromApiException(apiException);
+		ApiError apiError = this.getErrorApiFromApiException(apiException);
 		return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
 	}
 
 	@ExceptionHandler({ EntityAlreadyExistException.class })
-	public ResponseEntity<Object> handleCompilatioError(final EntityAlreadyExistException entityAlreadyExistException)
+	public ResponseEntity<Object> handleEntityAlreadyExistsException(final EntityAlreadyExistException entityAlreadyExistException)
 	{
-		ApiError apiError = getErrorApiFromEntityAlreadyExistException(entityAlreadyExistException);
+		ApiError apiError = this.getErrorApiFromEntityAlreadyExistException(entityAlreadyExistException);
 		return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
 	}
 
