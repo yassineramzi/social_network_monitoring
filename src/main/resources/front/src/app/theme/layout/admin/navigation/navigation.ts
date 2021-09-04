@@ -38,7 +38,7 @@ const NavigationItems = [
         type: 'item',
         url: '/dossiers-sociaux-page',
         classes: 'nav-item',
-        icon: 'feather icon-folder'
+        icon: 'feather icon-folder',
       }
     ]
   }

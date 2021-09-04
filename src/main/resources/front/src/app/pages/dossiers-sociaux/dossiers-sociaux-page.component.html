@@ -1,4 +1,4 @@
-<app-card>
+<app-card cardTitle="Liste des dossiers">
         <div class="row p-2">
           <div class="col-md-12">
             <button class="btn btn-primary float-right" (click)="openModal()">
@@ -25,9 +25,9 @@
                       </td>
                     </tr>
                     <tr *ngFor="let dossier of dossiersArrayPage">
-                      <td [routerLink]="['/profils-page', dossier.id, 'dossier']">{{dossier.nom}}</td>
-                      <td [routerLink]="['/profils-page', dossier.id, 'dossier']">{{dossier.profils.length}}</td>
-                      <td [routerLink]="['/profils-page', dossier.id, 'dossier']">{{categories[dossier.categorie]}}</td>
+                      <td><a [routerLink]="['/profils-page', dossier.id, 'dossier']">{{dossier.nom}}</a></td>
+                      <td><a [routerLink]="['/profils-page', dossier.id, 'dossier']">{{dossier.profils.length}}</a></td>
+                      <td><a [routerLink]="['/profils-page', dossier.id, 'dossier']">{{categories[dossier.categorie]}}</a></td>
                       <td>
                         <i class="feather icon-edit-2 mr-1" (click)="editDossier(dossier.id)"></i>
                         <i class="feather icon-trash-2" (click)="deleteDossier(dossier.id)"></i>

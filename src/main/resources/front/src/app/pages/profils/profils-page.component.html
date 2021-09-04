@@ -1,4 +1,4 @@
-<app-card>
+<app-card cardTitle="Liste des profils">
         <div class="row p-2">
           <div class="col-md-12">
             <button class="btn btn-primary float-right" (click)="openModal()">
@@ -12,8 +12,12 @@
                 <table id="table" class="table table-centered table-hover mb-0">
                   <thead>
                     <tr>
-                      <th scope="col">Nom</th>
-                      <th scope="col">Actions</th>
+                      <th scope="col">
+                        <span class="d-flex justify-content-center">Nom</span>
+                      </th>
+                      <th scope="col">
+                        <span class="d-flex justify-content-center">Actions</span>
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -23,10 +27,14 @@
                       </td>
                     </tr>
                     <tr *ngFor="let profil of profilsArrayPage">
-                      <td>{{profil.nom}}</td>
                       <td>
-                        <i class="feather icon-edit-2 mr-1" (click)="editProfil(profil.id)"></i>
-                        <i class="feather icon-trash-2" (click)="deleteProfil(profil.id)"></i>
+                        <span class="d-flex justify-content-center">{{profil.nom}}</span>
+                      </td>
+                      <td>
+                        <span class="d-flex justify-content-center">
+                          <i class="feather icon-edit-2 mr-1" (click)="editProfil(profil.id)"></i>
+                          <i class="feather icon-trash-2" (click)="deleteProfil(profil.id)"></i>
+                        </span>
                       </td>
                     </tr>
                   </tbody>

@@ -1,4 +1,4 @@
-<ng-container *ngIf="this.navigationList">
+<ng-container>
   <ng-container *ngFor="let breadcrumb of navigationList; let last = last">
     <div class="page-header" *ngIf="last && breadcrumb.breadcrumbs !== false">
       <div class="page-block">
@@ -9,8 +9,8 @@
             </div>
             <ul class="breadcrumb">
               <li class="breadcrumb-item">
-                <a [routerLink]="['/dashboard/analytics/']" *ngIf="type === 'theme2'"><i class="feather icon-home"></i></a>
-                <a [routerLink]="['/dashboard/analytics/']" *ngIf="type === 'theme1'">Home</a>
+                <a [routerLink]="['/dossiers-sociaux-page']" *ngIf="type === 'theme2'"><i class="feather icon-home"></i></a>
+                <a [routerLink]="['/dossiers-sociaux-page']" *ngIf="type === 'theme1'">Dossiers</a>
               </li>
               <ng-container *ngFor="let breadcrumb of navigationList">
                 <li class="breadcrumb-item" *ngIf="breadcrumb.url !== false"><a [routerLink]="breadcrumb.url">{{breadcrumb.title}}</a></li>
