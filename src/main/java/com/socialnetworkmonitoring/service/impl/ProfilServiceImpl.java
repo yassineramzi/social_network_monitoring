@@ -50,7 +50,7 @@ public class ProfilServiceImpl implements ProfilService {
 
     @Override
     public List<ProfilDTO> findProfilsByIdDossier(Long idDossier) {
-        return this.profilRepository.findByDossierId(idDossier).parallelStream().map(
+        return this.profilRepository.findByDossierSocialId(idDossier).parallelStream().map(
                 profil -> this.profilMapper.toDto(profil)
         ).collect(Collectors.toList());
     }

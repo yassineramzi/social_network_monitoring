@@ -40,7 +40,9 @@ public class DossierSocialServiceImpl implements DossierSocialService {
             throw new EntityAlreadyExistException("Dossier existant", "Un Dossier social existe dèjà avec ce nom : "+dossierSocialDTO.getNom());
         }
         DossierSocial dossierSocial = this.dossierSocialMapper.toEntity(dossierSocialDTO);
-        return this.dossierSocialMapper.toDto(this.dossierSocialRepository.save(dossierSocial));
+        this.dossierSocialRepository.save(dossierSocial);
+        DossierSocial dossierSocialTemp = this.dossierSocialRepository.findById(dossierSocial.getId()).get();
+        return this.dossierSocialMapper.toDto(dossierSocialTemp);
     }
 
     @Override

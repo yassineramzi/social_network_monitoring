@@ -35,7 +35,8 @@ public class Profil implements Serializable {
     @Column(name="lien_instagram")
     private String lienInstagram;
 
-    @Column(name="id_dossier_social", updatable = false)
-    private Long dossierId;
+    @ManyToOne
+    @JoinColumn(name="id_dossier_social")
+    private DossierSocial dossierSocial;
 
 }

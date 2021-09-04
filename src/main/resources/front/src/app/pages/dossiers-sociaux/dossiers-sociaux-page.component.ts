@@ -112,7 +112,8 @@ export class DossiersSociauxPageComponent implements OnInit {
     if(index === -1){
       this.dossiersArray.push(dossier);
     } else {
-      this.dossiersArray[index] = dossier;
+      this.dossiersArray[index].nom = dossier.nom;
+      this.dossiersArray[index].categorie = dossier.categorie;
     }
     this.refreshDossiers();
   }

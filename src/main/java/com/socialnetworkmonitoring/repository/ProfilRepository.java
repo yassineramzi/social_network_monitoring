@@ -12,5 +12,5 @@ public interface ProfilRepository extends JpaRepository<Profil, Long> {
 
     Boolean existsByNomAndIdIsNot(String nom, Long id);
 
-    List<Profil> findByDossierId(Long idDossier);
+    List<Profil> findByDossierSocialId(Long idDossier);
 }

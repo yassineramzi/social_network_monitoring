@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,4 +27,7 @@ public class DossierSocial implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name="categorie", length = 100)
     private ECategorie categorie;
+
+    @OneToMany(mappedBy="dossierSocial", cascade=CascadeType.ALL)
+    private List<Profil> profils = new ArrayList<>();
 }
