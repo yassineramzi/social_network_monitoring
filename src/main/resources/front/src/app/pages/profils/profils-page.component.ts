@@ -8,6 +8,7 @@ import { ConfirmationPopupService } from "@services/confirmationPopup.service";
 import { Profil } from "@models/profil.model";
 import { AjoutProfilModalComponent } from './ajout-profil-modal/ajout-profil-modal.component';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profils',
@@ -39,7 +40,8 @@ export class ProfilsPageComponent implements OnInit {
       protected profilService: ProfilService,
       protected modalService: NgbModal,
       protected confirmationPopupServcie: ConfirmationPopupService,
-      protected activatedRoute : ActivatedRoute
+      protected activatedRoute : ActivatedRoute,
+      protected toastService: ToastrService
     ) { }
 
   public ngOnInit(): void {
@@ -102,8 +104,9 @@ export class ProfilsPageComponent implements OnInit {
         if(confirmed === true ) {
           this.profilService.delete(idProfil).subscribe(
             (response) => {
-              this.profilsArray.splice(this.profilsArray.indexOf(profil),1);
+              let profilSupprime: Profil = this.profilsArray.splice(this.profilsArray.indexOf(profil),1)[0];
               this.refreshProfils();
+              this.toastService.success('Le profil '+profilSupprime.nom+' a été supprimé', 'Suppression du profil');
             }
           );
         }

@@ -8,6 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DossierSocialService } from '@services/dossierSocial.service';
 import { ConfirmationPopupService } from "@services/confirmationPopup.service";
 import { AjoutDossierModalComponent } from './ajout-dossier-modal/ajout-dossier-modal.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dossiers-sociaux',
@@ -38,7 +39,8 @@ export class DossiersSociauxPageComponent implements OnInit {
       protected formBuilder: FormBuilder,
       protected dossierSocialService: DossierSocialService,
       protected modalService: NgbModal,
-      protected confirmationPopupServcie: ConfirmationPopupService
+      protected confirmationPopupServcie: ConfirmationPopupService,
+      protected toastService: ToastrService
     ) { }
 
   public ngOnInit(): void {
@@ -92,8 +94,9 @@ export class DossiersSociauxPageComponent implements OnInit {
         if(confirmed === true ) {
           this.dossierSocialService.delete(idDossier).subscribe(
             (response) => {
-              this.dossiersArray.splice(this.dossiersArray.indexOf(dossier),1);
+              let dossierSupprime: DossierSocial = this.dossiersArray.splice(this.dossiersArray.indexOf(dossier),1)[0];
               this.refreshDossiers();
+              this.toastService.success('Le dossier '+dossierSupprime.nom+' a été supprimé', 'Suppression du dossier');
             }
           );
         }
