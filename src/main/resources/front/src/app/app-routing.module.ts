@@ -31,6 +31,10 @@ const routes: Routes = [
       {
         path: 'dossiers-sociaux-page',
         loadChildren: () => import('@pages/dossiers-sociaux/dossiers-sociaux-page.module').then(module => module.DossiersSociauxPageModule)
+      },
+      {
+        path: 'profils-page',
+        loadChildren: () => import('@pages/profils/profils-page.module').then(module => module.ProfilsPageModule)
       }
     ]
   }

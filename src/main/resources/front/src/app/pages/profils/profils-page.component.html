@@ -2,7 +2,7 @@
         <div class="row p-2">
           <div class="col-md-12">
             <button class="btn btn-primary float-right" (click)="openModal()">
-              Ajouter un dossier
+              Ajouter d'un profil
             </button>
           </div>
         </div>
@@ -13,32 +13,28 @@
                   <thead>
                     <tr>
                       <th scope="col">Nom</th>
-                      <th scope="col">Nombre de profils</th>
-                      <th scope="col">Catégorie</th>
                       <th scope="col">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngIf="dossiersArrayPage.length === 0">
+                    <tr *ngIf="profilsArrayPage.length === 0">
                       <td colspan="4">
-                        <span class="d-flex justify-content-center">Aucun dossier disponible</span>
+                        <span class="d-flex justify-content-center">Aucun profil disponible</span>
                       </td>
                     </tr>
-                    <tr *ngFor="let dossier of dossiersArrayPage">
-                      <td [routerLink]="['/profils-page', dossier.id, 'dossier']">{{dossier.nom}}</td>
-                      <td [routerLink]="['/profils-page', dossier.id, 'dossier']">{{dossier.profils.length}}</td>
-                      <td [routerLink]="['/profils-page', dossier.id, 'dossier']">{{categories[dossier.categorie]}}</td>
+                    <tr *ngFor="let profil of profilsArrayPage">
+                      <td>{{profil.nom}}</td>
                       <td>
-                        <i class="feather icon-edit-2 mr-1" (click)="editDossier(dossier.id)"></i>
-                        <i class="feather icon-trash-2" (click)="deleteDossier(dossier.id)"></i>
+                        <i class="feather icon-edit-2 mr-1" (click)="editProfil(profil.id)"></i>
+                        <i class="feather icon-trash-2" (click)="deleteProfil(profil.id)"></i>
                       </td>
                     </tr>
                   </tbody>
                 </table>
                 <div class="d-flex justify-content-between p-2" [formGroup]="paginationForm">
-                  <ngb-pagination [collectionSize]="dossiersCollectionSize" [(page)]="dossiersPage" [pageSize]="pageSize" (pageChange)="refreshDossiers()">
+                  <ngb-pagination [collectionSize]="profilsCollectionSize" [(page)]="profilsPage" [pageSize]="pageSize" (pageChange)="refreshProfils()">
                   </ngb-pagination>
-                  <select class="custom-select" style="width: auto" formControlName="pageSize" (change)="refreshDossiers()">
+                  <select class="custom-select" style="width: auto" formControlName="pageSize" (change)="refreshProfils()">
                     <option [ngValue]="2">2 résultats par page</option>
                     <option [ngValue]="4">4 résultats par page</option>
                     <option [ngValue]="6">6 résultats par page</option>

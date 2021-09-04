@@ -1,6 +1,7 @@
 package com.socialnetworkmonitoring.models;
 
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 @Entity
 @ToString
 @EqualsAndHashCode
+@DynamicUpdate
 @Table(name = "profil")
 public class Profil implements Serializable {
 
@@ -33,7 +35,7 @@ public class Profil implements Serializable {
     @Column(name="lien_instagram")
     private String lienInstagram;
 
-    @Column(name="id_dossier_social")
-    private Long idDossierSocial;
+    @Column(name="id_dossier_social", updatable = false)
+    private Long dossierId;
 
 }
