@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 import { ProfilService } from '@services/profil.service';
 import { Profil } from '@models/profil.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ajout-profil-modal',
@@ -29,7 +30,8 @@ export class AjoutProfilModalComponent implements OnInit {
   constructor(
     protected activeModal: NgbActiveModal,
     protected formBuilder: FormBuilder,
-    protected profilService: ProfilService
+    protected profilService: ProfilService,
+    protected toastService: ToastrService
   ) {
   }
 
@@ -44,7 +46,6 @@ export class AjoutProfilModalComponent implements OnInit {
         lienInstagram: this.profil.lienInstagram
       });
     }
-    console.log(this.idDossier)
   }
 
   public accept(): void {
@@ -62,14 +63,20 @@ export class AjoutProfilModalComponent implements OnInit {
       this.profilService.update(profil).subscribe(
         (response: HttpResponse<Profil>) => {
           this.activeModal.close(response.body);
-          // this.toastService.show('Le profil '+profil.nom+' a été mis à jour', { classname: 'bg-success text-light', delay: 1000 });
+          this.toastService.success('Le profil '+profil.nom+' a été mis à jour', 'Modification du profil');
+        },
+        (response: HttpErrorResponse) => {
+          this.toastService.error(response.error.error, response.error.message);
         }
       );
     } else {
       this.profilService.create(profil).subscribe(
         (response: HttpResponse<Profil>) => {
           this.activeModal.close(response.body);
-          // this.toastService.show('Le profil '+profil.nom+' a été créé', { classname: 'bg-success text-light', delay: 1000 });
+          this.toastService.success('Le profil '+profil.nom+' a été créé', 'Création du profil');
+        },
+        (response: HttpErrorResponse) => {
+          this.toastService.error(response.error.error, response.error.message);
         }
       );
     }

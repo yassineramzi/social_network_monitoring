@@ -28,7 +28,7 @@ import { authInterceptorProviders } from '@services/auth.interceptor';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ConfirmationPopupModule } from '@modals/confirmationPopup/confirmationPopup.module';
-import { ToastsContainer } from '@containers/toasts-container.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -45,8 +45,7 @@ import { ToastsContainer } from '@containers/toasts-container.component';
     NavSearchComponent,
     NavRightComponent,
     ConfigurationComponent,
-    ToggleFullScreenDirective,
-    ToastsContainer
+    ToggleFullScreenDirective
   ],
   imports: [
     BrowserModule,
@@ -59,10 +58,14 @@ import { ToastsContainer } from '@containers/toasts-container.component';
     NgbTabsetModule,
     HttpClientModule,
     ConfirmationPopupModule,
-    NgbModule
+    NgbModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    })
   ],
   exports : [
-    ToastsContainer
   ],
   providers: [NavigationItem, authInterceptorProviders],
   bootstrap: [AppComponent]

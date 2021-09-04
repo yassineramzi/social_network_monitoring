@@ -28,7 +28,7 @@ public class ProfilServiceImpl implements ProfilService {
     @Override
     public ProfilDTO create(ProfilDTO profilDTO) throws EntityAlreadyExistException {
         if (this.profilRepository.existsByNom(profilDTO.getNom())) {
-            throw new EntityAlreadyExistException("Dossier existant", "Un profil existe dèjà avec ce nom : "+profilDTO.getNom());
+            throw new EntityAlreadyExistException("Profil existant", "Un profil existe dèjà avec ce nom : "+profilDTO.getNom());
         }
         Profil profil = this.profilMapper.toEntity(profilDTO);
         return this.profilMapper.toDto(this.profilRepository.save(profil));
@@ -37,7 +37,7 @@ public class ProfilServiceImpl implements ProfilService {
     @Override
     public ProfilDTO update(ProfilDTO profilDTO) throws EntityAlreadyExistException {
         if (this.profilRepository.existsByNomAndIdIsNot(profilDTO.getNom(), profilDTO.getId())) {
-            throw new EntityAlreadyExistException("Dossier existant", "Un profil existe dèjà avec ce nom : "+profilDTO.getNom());
+            throw new EntityAlreadyExistException("Profil existant", "Un profil existe dèjà avec ce nom : "+profilDTO.getNom());
         }
         Profil profil = this.profilMapper.toEntity(profilDTO);
         return this.profilMapper.toDto(this.profilRepository.save(profil));

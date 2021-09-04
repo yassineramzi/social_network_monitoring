@@ -2,13 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
+import { ToastrService } from 'ngx-toastr';
+
 import { DossierSocial } from "@models/dossierSocial.model";
 import { ECategorie } from '@models/enum/ecategorie.enum';
 import { DossierSocialService } from '@services/dossierSocial.service';
 
-import { HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Profil } from '@models/profil.model';
-import { ToastService } from '@services/toast.service';
 
 @Component({
   selector: 'app-ajout-dossier-modal',
@@ -33,7 +34,7 @@ export class AjoutDossierModalComponent implements OnInit {
     protected activeModal: NgbActiveModal,
     protected formBuilder: FormBuilder,
     protected dossierSocialService: DossierSocialService,
-    public toastService: ToastService
+    protected toastService: ToastrService
   ) {
   }
 
@@ -59,14 +60,20 @@ export class AjoutDossierModalComponent implements OnInit {
       this.dossierSocialService.update(dossier).subscribe(
         (response: HttpResponse<DossierSocial>) => {
           this.activeModal.close(response.body);
-          // this.toastService.show('Le dossier '+dossier.nom+' a été mis à jour', { classname: 'bg-success text-light', delay: 1000 });
+          this.toastService.success('Le dossier '+dossier.nom+' a été mis à jour', 'Modification du dossier');
+        },
+        (response: HttpErrorResponse) => {
+          this.toastService.error(response.error.error, response.error.message);
         }
       );
     } else {
       this.dossierSocialService.create(dossier).subscribe(
         (response: HttpResponse<DossierSocial>) => {
           this.activeModal.close(response.body);
-          // this.toastService.show('Le dossier '+dossier.nom+' a été créé', { classname: 'bg-success text-light', delay: 1000 });
+          this.toastService.success('Le dossier '+dossier.nom+' a été créé', 'Création du dossier');
+        },
+        (response: HttpErrorResponse) => {
+          this.toastService.error(response.error.error, response.error.message);
         }
       );
     }
