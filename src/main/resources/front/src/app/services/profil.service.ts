@@ -29,7 +29,11 @@ export class ProfilService {
     }
 
     findByIdDossier(id: number): Observable<EntityArrayResponseType> {
-        return this.http.get<Profil[]>(`${this.resourceUrl}/${id}`, {observe: 'response'});
+        return this.http.get<Profil[]>(`${this.resourceUrl}/${id}/dossier`, {observe: 'response'});
+    }
+
+    findById(id: number): Observable<EntityResponseType> {
+        return this.http.get<Profil>(`${this.resourceUrl}/${id}`, {observe: 'response'});
     }
 
     delete(id: number): Observable<HttpResponse<void>>{

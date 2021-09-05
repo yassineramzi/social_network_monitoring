@@ -39,6 +39,14 @@ const NavigationItems = [
         url: '/dossiers-sociaux-page',
         classes: 'nav-item',
         icon: 'feather icon-folder',
+      },
+      {
+        id: 'profils-page',
+        title: 'Profils',
+        type: 'item',
+        url: '/profils-page',
+        classes: 'nav-item',
+        icon: 'feather icon-user',
       }
     ]
   }

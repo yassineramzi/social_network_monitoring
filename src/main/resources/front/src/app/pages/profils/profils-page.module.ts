@@ -6,9 +6,10 @@ import { SharedModule } from "../../theme/shared/shared.module";
 import { ProfilsPageComponent } from './profils-page.component';
 import { ProfilsPageRoutingModule } from './profils-page-routing.module';
 import { AjoutProfilModalComponent } from '@pages/profils/ajout-profil-modal/ajout-profil-modal.component';
+import { SelectDossierModalComponent } from '@pages/profils/select-dossier-modal/select-dossier-modal.component';
 
 @NgModule({
-  declarations: [ProfilsPageComponent, AjoutProfilModalComponent],
+  declarations: [ProfilsPageComponent, AjoutProfilModalComponent, SelectDossierModalComponent],
   exports: [ProfilsPageComponent],
   bootstrap: [ProfilsPageComponent],
   imports: [

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <property name="autoIncrement" value="true"/>
+
+    <!--
+        Added the entity Profil Statistique.
+    -->
+    <changeSet id="6" author="">
+        <createTable tableName="profil_statistique">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="date_statistique" type="Date">
+                <constraints nullable="true"/>
+            </column>
+            <column name="nombre_followers_youtube" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="nombre_vues_youtube" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="nombre_followers_facebook" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="nombre_followers_twitter" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="nombre_followers_instagram" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="id_profil" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

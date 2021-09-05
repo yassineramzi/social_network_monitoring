@@ -1,17 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProfilsPageComponent } from './profils-page.component';
+import { ProfilsStatistiquesPageComponent } from './profils-statistiques-page.component';
 import { AuthGuard } from '@services/auth.guard';
 const routes: Routes = [
   {
-    path: '',
-    component: ProfilsPageComponent,
-    canActivate: [AuthGuard], 
-    data: { roles: ['ROLE_ADMIN'] }
-  },
-  {
-    path: ':idDossier/dossier',
-    component: ProfilsPageComponent,
+    path: ':idProfil/profil',
+    component: ProfilsStatistiquesPageComponent,
     canActivate: [AuthGuard], 
     data: { roles: ['ROLE_ADMIN'] }
   }
@@ -21,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ProfilsPageRoutingModule { }
+export class ProfilsStatistiquesPageRoutingModule { }

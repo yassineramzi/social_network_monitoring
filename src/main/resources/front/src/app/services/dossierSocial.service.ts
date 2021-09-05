@@ -32,6 +32,10 @@ export class DossierSocialService {
         return this.http.get<DossierSocial[]>(this.resourceUrl + '/all', {observe: 'response'});
     }
 
+    findById(id: number): Observable<EntityResponseType> {
+        return this.http.get<DossierSocial>(`${this.resourceUrl}/${id}`, {observe: 'response'});
+    }
+
     delete(id: number): Observable<HttpResponse<void>>{
         return this.http.delete<void>(this.resourceUrl + "/delete?id="+id, {observe: 'response'});
     }

@@ -1,0 +1,73 @@
+<app-card cardTitle="Liste des statistiques pour le profil : {{profil.nom}}">
+        <div class="row p-2">
+          <div class="col-md-12">
+            Dernière mise à jour : 
+          </div>
+        </div>
+        <div class="row p-2">
+          <div class="col-md-12">
+              <div class="table-responsive">
+                <table id="table" class="table table-centered table-hover mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col">
+                        <span class="d-flex justify-content-center">Date</span>
+                      </th>
+                      <th scope="col">
+                        <span class="d-flex justify-content-center">Fans (Fb)</span>
+                      </th>
+                      <th scope="col">
+                        <span class="d-flex justify-content-center">Followers (Tw)</span>
+                      </th>
+                      <th scope="col">
+                        <span class="d-flex justify-content-center">Followers (In)</span>
+                      </th>
+                      <th scope="col">
+                        <span class="d-flex justify-content-center">Subscribers (You)</span>
+                      </th>
+                      <th scope="col">
+                        <span class="d-flex justify-content-center">Views (You)</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngIf="profilsStatistiquesArrayPage.length === 0">
+                      <td colspan="6">
+                        <span class="d-flex justify-content-center">Aucune statistique disponible</span>
+                      </td>
+                    </tr>
+                    <tr *ngFor="let profilStatistique of profilsStatistiquesArrayPage">
+                      <td>
+                        <span class="d-flex justify-content-center">{{profilStatistique.dateStatistique | date:'MM/dd/yyyy hh:mm'}}</span>
+                      </td>
+                      <td>
+                        <span class="d-flex justify-content-center">{{profilStatistique.nombreFollowersFacebook}}</span>
+                      </td>
+                      <td>
+                        <span class="d-flex justify-content-center">{{profilStatistique.nombreFollowersTwitter}}</span>
+                      </td>
+                      <td>
+                        <span class="d-flex justify-content-center">{{profilStatistique.nombreFollowersInstagram}}</span>
+                      </td>
+                      <td>
+                        <span class="d-flex justify-content-center">{{profilStatistique.nombreFollowersYoutube}}</span>
+                      </td>
+                      <td>
+                        <span class="d-flex justify-content-center">{{profilStatistique.nombreVuesYoutube}}</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="d-flex justify-content-between p-2" [formGroup]="paginationForm">
+                  <ngb-pagination [collectionSize]="profilsStatistiquesCollectionSize" [(page)]="profilsStatistiquesPage" [pageSize]="pageSize" (pageChange)="refreshProfilsStatistiques()">
+                  </ngb-pagination>
+                  <select class="custom-select" style="width: auto" formControlName="pageSize" (change)="refreshProfilsStatistiques()">
+                    <option [ngValue]="2">2 résultats par page</option>
+                    <option [ngValue]="4">4 résultats par page</option>
+                    <option [ngValue]="6">6 résultats par page</option>
+                  </select>
+                </div> 
+              </div>
+          </div>
+        </div>
+</app-card>

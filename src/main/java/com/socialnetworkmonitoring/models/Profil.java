@@ -5,6 +5,8 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -38,5 +40,8 @@ public class Profil implements Serializable {
     @ManyToOne
     @JoinColumn(name="id_dossier_social")
     private DossierSocial dossierSocial;
+
+    @OneToMany(mappedBy="profil", cascade=CascadeType.ALL)
+    private List<ProfilStatistique> profilStatistiques = new ArrayList<>();
 
 }

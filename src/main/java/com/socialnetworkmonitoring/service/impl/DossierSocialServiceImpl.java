@@ -5,11 +5,13 @@ import com.socialnetworkmonitoring.models.DossierSocial;
 import com.socialnetworkmonitoring.repository.DossierSocialRepository;
 import com.socialnetworkmonitoring.service.DossierSocialService;
 import com.socialnetworkmonitoring.service.dto.DossierSocialDTO;
+import com.socialnetworkmonitoring.service.dto.ProfilDTO;
 import com.socialnetworkmonitoring.service.mapper.DossierSocialMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,6 +50,11 @@ public class DossierSocialServiceImpl implements DossierSocialService {
     @Override
     public void delete(Long idDossierSocial) {
         this.dossierSocialRepository.deleteById(idDossierSocial);
+    }
+
+    @Override
+    public Optional<DossierSocialDTO> findOne(Long id) {
+        return this.dossierSocialRepository.findById(id).map(dossierSocialMapper::toDto);
     }
 
     @Override

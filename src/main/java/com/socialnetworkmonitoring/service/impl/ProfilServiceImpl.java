@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,6 +54,11 @@ public class ProfilServiceImpl implements ProfilService {
         return this.profilRepository.findByDossierSocialId(idDossier).parallelStream().map(
                 profil -> this.profilMapper.toDto(profil)
         ).collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<ProfilDTO> findOne(Long id) {
+        return this.profilRepository.findById(id).map(profilMapper::toDto);
     }
 
 }

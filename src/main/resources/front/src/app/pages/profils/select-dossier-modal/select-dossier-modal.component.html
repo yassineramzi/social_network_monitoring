@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="modal-basic-title">Choisir un dossier que vous voulez consulter ses profils :</h5>
+</div>
+<div class="modal-body" [formGroup]="selectDossierModalForm">
+  <div class="form-group">
+    <label for="dossier">Dossier <b>*</b> :</label>
+    <select id="idDossier" class="form-control" formControlName="idDossier" name="idDossier">
+      <option [ngValue]="dossier.id" *ngFor="let dossier of dossiers">{{ dossier.nom }}</option>
+    </select>
+    <div
+      class="invalid-feedback d-block"
+      *ngIf="selectDossierModalForm.get('idDossier').hasError('required')
+            &&
+            (selectDossierModalForm.get('idDossier').dirty || selectDossierModalForm.get('idDossier').touched)">
+      Veuillez sélectionner un dossier
+    </div>
+  </div>
+</div>
+<div class="modal-footer d-flex justify-content-center">
+  <button type="button" class="btn btn-secondary" (click)="close()">Retour</button>
+  <button type="button" class="btn btn-primary" (click)="accept()" [disabled]="!selectDossierModalForm.valid">Ok</button>
+</div>

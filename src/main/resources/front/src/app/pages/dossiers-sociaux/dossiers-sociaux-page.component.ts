@@ -21,7 +21,7 @@ export class DossiersSociauxPageComponent implements OnInit {
 
   public paginationForm: FormGroup = this.formBuilder.group(
     {
-      pageSize : new FormControl(2)
+      pageSize : new FormControl(6)
     }
   );
 
@@ -31,7 +31,7 @@ export class DossiersSociauxPageComponent implements OnInit {
 
   public dossiersCollectionSize: number = 0;
 
-  public pageSize: number = 4;
+  public pageSize: number;
 
   private dossiersArray: Array<DossierSocial> = [];
 

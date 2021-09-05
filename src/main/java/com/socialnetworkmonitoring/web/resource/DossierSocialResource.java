@@ -3,8 +3,10 @@ package com.socialnetworkmonitoring.web.resource;
 import com.socialnetworkmonitoring.exceptions.EntityAlreadyExistException;
 import com.socialnetworkmonitoring.service.DossierSocialService;
 import com.socialnetworkmonitoring.service.dto.DossierSocialDTO;
+import com.socialnetworkmonitoring.service.dto.ProfilDTO;
 import com.socialnetworkmonitoring.web.error.ApiException;
 import com.socialnetworkmonitoring.web.util.HeaderUtil;
+import com.socialnetworkmonitoring.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/dossier")
@@ -57,6 +60,13 @@ public class DossierSocialResource {
     public ResponseEntity<List<DossierSocialDTO>> findAll() {
         log.info("Récupération de tous les dossiers sociaux :");
         return ResponseEntity.ok(this.dossierSocialService.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DossierSocialDTO> findById(@PathVariable("id") Long id) {
+        log.info("Récupération du dossier par Id : "+id);
+        Optional<DossierSocialDTO> dossierDTOOptional = this.dossierSocialService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(dossierDTOOptional);
     }
 
     @DeleteMapping("/delete")

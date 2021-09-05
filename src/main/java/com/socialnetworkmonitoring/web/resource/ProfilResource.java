@@ -5,6 +5,7 @@ import com.socialnetworkmonitoring.service.ProfilService;
 import com.socialnetworkmonitoring.service.dto.ProfilDTO;
 import com.socialnetworkmonitoring.web.error.ApiException;
 import com.socialnetworkmonitoring.web.util.HeaderUtil;
+import com.socialnetworkmonitoring.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/profil")
@@ -54,10 +56,17 @@ public class ProfilResource {
                 .body(result);
     }
 
-    @GetMapping("/{idDossier}")
+    @GetMapping("/{idDossier}/dossier")
     public ResponseEntity<List<ProfilDTO>> findByDossierId(@PathVariable("idDossier") Long idDossier) {
         log.info("Récupération de tous des profils, du dossier:"+idDossier);
         return ResponseEntity.ok(this.profilService.findProfilsByIdDossier(idDossier));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProfilDTO> findById(@PathVariable("id") Long id) {
+        log.info("Récupération du profil par Id : "+id);
+        Optional<ProfilDTO> profilDTOOptional = this.profilService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(profilDTOOptional);
     }
 
     @DeleteMapping("/delete")

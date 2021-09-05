@@ -9,6 +9,10 @@ import { Profil } from "@models/profil.model";
 import { AjoutProfilModalComponent } from './ajout-profil-modal/ajout-profil-modal.component';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { forkJoin } from 'rxjs';
+import { DossierSocial } from '@models/dossierSocial.model';
+import { DossierSocialService } from '@services/dossierSocial.service';
+import { SelectDossierModalComponent } from './select-dossier-modal/select-dossier-modal.component';
 
 @Component({
   selector: 'app-profils',
@@ -19,7 +23,7 @@ export class ProfilsPageComponent implements OnInit {
 
   public paginationForm: FormGroup = this.formBuilder.group(
     {
-      pageSize : new FormControl(2)
+      pageSize : new FormControl(6)
     }
   );
 
@@ -29,19 +33,22 @@ export class ProfilsPageComponent implements OnInit {
 
   public profilsCollectionSize: number = 0;
 
-  public pageSize: number = 4;
+  public pageSize: number;
 
-  private idDossier: number;
+  public idDossier: number;
+
+  public dossier: DossierSocial = new DossierSocial();
 
   private profilsArray: Array<Profil> = [];
 
   constructor(
       protected formBuilder: FormBuilder,
       protected profilService: ProfilService,
+      protected dossierService: DossierSocialService,
       protected modalService: NgbModal,
-      protected confirmationPopupServcie: ConfirmationPopupService,
+      protected confirmationPopupService: ConfirmationPopupService,
+      protected toastService: ToastrService,
       protected activatedRoute : ActivatedRoute,
-      protected toastService: ToastrService
     ) { }
 
   public ngOnInit(): void {
@@ -50,12 +57,23 @@ export class ProfilsPageComponent implements OnInit {
         if( params ['idDossier'] )
         {
           this.idDossier = params ['idDossier'];
-          this.profilService.findByIdDossier(params ['idDossier']).subscribe(
-            (response: HttpResponse<Profil[]>) => {
-              this.profilsArray = response.body || [];
-              this.refreshProfils();
+          forkJoin(
+            [
+              this.profilService.findByIdDossier(this.idDossier),
+              this.dossierService.findById(this.idDossier)
+            ]
+          )
+          .subscribe(
+            (results: any) => {
+              this._onProfilsSuccess(results[0]);
+              this._onDossierSuccess(results[1]);
+            },
+            (error: any) => {
+              this.dossier = new DossierSocial();
             }
           );
+        } else {
+          this._openSelectDossierModal();
         }
       }
     );
@@ -77,7 +95,7 @@ export class ProfilsPageComponent implements OnInit {
     modalRef.result.then(
       (result: Profil) => {
         if (result) {
-          this.addProfil(result);
+          this._addProfil(result);
         }
       }
     );
@@ -96,7 +114,7 @@ export class ProfilsPageComponent implements OnInit {
     let profil: Profil = this.profilsArray.filter(
       profilTemp => profilTemp.id === idProfil
     )[0];
-    this.confirmationPopupServcie.confirm(
+    this.confirmationPopupService.confirm(
       'Confirmer',
       'Voulez vous supprimer le profil '+profil.nom+' ?'
     ).then(
@@ -118,7 +136,7 @@ export class ProfilsPageComponent implements OnInit {
     return this.paginationForm.get('pageSize') as FormControl;
   }
 
-  private addProfil(profil: Profil): void {
+  private _addProfil(profil: Profil): void {
     let index: number = this.profilsArray.findIndex( profilTemp => {
       return profilTemp.id === profil.id;
     });
@@ -128,5 +146,18 @@ export class ProfilsPageComponent implements OnInit {
       this.profilsArray[index] = profil;
     }
     this.refreshProfils();
+  }
+
+  private _onProfilsSuccess(response: HttpResponse<Profil[]>): void{
+    this.profilsArray = response.body || [];
+    this.refreshProfils();
+  }
+
+  private _onDossierSuccess(response: HttpResponse<DossierSocial>): void{
+    this.dossier = response.body;
+  }
+
+  private _openSelectDossierModal(): void {
+    this.modalService.open(SelectDossierModalComponent, {keyboard: false, backdrop: 'static', size: 'md'});
   }
 }
