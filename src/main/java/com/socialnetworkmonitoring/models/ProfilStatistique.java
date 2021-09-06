@@ -5,6 +5,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 
 @Data
@@ -25,19 +26,19 @@ public class ProfilStatistique implements Serializable {
     private Date dateStatistique;
 
     @Column(name="nombre_followers_youtube")
-    private Long nombreFollowersYoutube;
+    private BigInteger nombreFollowersYoutube;
 
     @Column(name="nombre_vues_youtube")
-    private Long nombreVuesYoutube;
+    private BigInteger nombreVuesYoutube;
 
     @Column(name="nombre_followers_facebook")
-    private Long nombreFollowersFacebook;
+    private BigInteger nombreFollowersFacebook;
 
     @Column(name="nombre_followers_twitter")
-    private Long nombreFollowersTwitter;
+    private BigInteger nombreFollowersTwitter;
 
     @Column(name="nombre_followers_instagram")
-    private Long nombreFollowersInstagram;
+    private BigInteger nombreFollowersInstagram;
 
     @ManyToOne
     @JoinColumn(name="id_profil")

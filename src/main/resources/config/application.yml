@@ -56,6 +56,10 @@ spring:
     cache: false
 server:
   port: 8080
+youtube:
+  applicationName: Social-youtube-data
+  api:
+    secret: AIzaSyA4dChZXe0nQcuYHfi5-BWzQyyso16u28o
 
 
 

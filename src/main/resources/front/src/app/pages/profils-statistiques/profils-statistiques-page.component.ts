@@ -85,19 +85,6 @@ export class ProfilsStatistiquesPageComponent implements OnInit {
 
   private _onProfilsStatistiquesSuccess(response: HttpResponse<ProfilStatistique[]>): void {
     this.profilsStatistiquesArray = response.body || [];
-    // TODO : remove after the creation of the Batchs
-    this.profilsStatistiquesArray.push(
-      new ProfilStatistique(
-        1,
-        new Date(),
-        1000000,
-        2000000,
-        3000000,
-        4000000,
-        300000,
-        1
-      )
-    );
     this.refreshProfilsStatistiques();
   }
 }
