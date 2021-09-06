@@ -3,7 +3,6 @@ package com.socialnetworkmonitoring.web.resource;
 import com.socialnetworkmonitoring.exceptions.EntityAlreadyExistException;
 import com.socialnetworkmonitoring.service.DossierSocialService;
 import com.socialnetworkmonitoring.service.dto.DossierSocialDTO;
-import com.socialnetworkmonitoring.service.dto.ProfilDTO;
 import com.socialnetworkmonitoring.web.error.ApiException;
 import com.socialnetworkmonitoring.web.util.HeaderUtil;
 import com.socialnetworkmonitoring.web.util.ResponseUtil;

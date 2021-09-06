@@ -8,8 +8,8 @@
 
 logging:
   level:
-    ROOT: DEBUG
-    com.socialnetworkmonitoring: DEBUG
+    ROOT: INFO
+    com.socialnetworkmonitoring: INFO
 
 spring:
   profiles:
