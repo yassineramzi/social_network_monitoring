@@ -25,7 +25,7 @@ public class YoutubeStatisticsServiceImpl implements YoutubeStatisticsService {
     @Value("${youtube.applicationName}")
     private String applicationName;
 
-    public ChannelStatistics getYoutubeStatistics(Profil profil) throws IOException {
+    public ChannelStatistics getYoutubeStatisticsByProfil(Profil profil) throws IOException {
         HttpRequestInitializer httpRequestInitializer = new HttpRequestInitializer() {
             public void initialize(HttpRequest request) throws IOException {
             }

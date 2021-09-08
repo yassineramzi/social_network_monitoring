@@ -6,5 +6,5 @@ import com.socialnetworkmonitoring.models.Profil;
 import java.io.IOException;
 
 public interface YoutubeStatisticsService {
-    ChannelStatistics getYoutubeStatistics(Profil profil) throws IOException;
+    ChannelStatistics getYoutubeStatisticsByProfil(Profil profil) throws IOException;
 }
