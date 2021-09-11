@@ -1,38 +1,28 @@
 package com.socialnetworkmonitoring.service.impl;
 
 import com.socialnetworkmonitoring.models.Profil;
-import com.socialnetworkmonitoring.service.TwitterStaticticsService;
+import com.socialnetworkmonitoring.service.InstagramStatisticsService;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 
 @Service
-public class TwitterStaticticsServiceImpl implements TwitterStaticticsService {
-
-    @Value("${twitter.bearerToken}")
-    private String bearerToken;
-
-    @Value("${twitter.endPoint}")
-    private String endPoint;
+public class InstagramStatisticsServiceImpl implements InstagramStatisticsService {
 
     @Override
-    public BigInteger getTwitterStatisticsByProfil(Profil profil) throws URISyntaxException, IOException {
+    public BigInteger getInstagramStatisticsByProfil(Profil profil) throws URISyntaxException, IOException {
         BigInteger nombreFollowers = null;
         String searchResponse = null;
 
@@ -41,14 +31,9 @@ public class TwitterStaticticsServiceImpl implements TwitterStaticticsService {
                         .setCookieSpec(CookieSpecs.STANDARD).build())
                 .build();
 
-        URIBuilder uriBuilder = new URIBuilder(this.endPoint+profil.getLienTwitter());
-        ArrayList<NameValuePair> queryParameters;
-        queryParameters = new ArrayList<>();
-        queryParameters.add(new BasicNameValuePair("user.fields", "public_metrics"));
-        uriBuilder.addParameters(queryParameters);
+        URIBuilder uriBuilder = new URIBuilder("");
 
         HttpGet httpGet = new HttpGet(uriBuilder.build());
-        httpGet.setHeader("Authorization", String.format("Bearer %s", this.bearerToken));
         httpGet.setHeader("Content-Type", "application/json");
 
         HttpResponse response = httpClient.execute(httpGet);
@@ -63,8 +48,9 @@ public class TwitterStaticticsServiceImpl implements TwitterStaticticsService {
     private BigInteger getNombreFollowersFromTwitterResponse(String searchResponse) {
         BigInteger nombreFollowers = null;
         JSONObject jsonObject = new JSONObject(searchResponse);
-        nombreFollowers = ((JSONObject) ((JSONObject) jsonObject.get("data")).get("public_metrics")).getBigInteger("followers_count");
+        System.out.println(searchResponse);
+        System.out.println(jsonObject.get("graphql"));
+        nombreFollowers = ((JSONObject) ((JSONObject) jsonObject.get("graphql")).get("edge_followed_by")).getBigInteger("count");
         return nombreFollowers;
     }
 }
-

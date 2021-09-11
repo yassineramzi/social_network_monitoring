@@ -61,6 +61,7 @@ youtube:
   api:
     secret: AIzaSyA4dChZXe0nQcuYHfi5-BWzQyyso16u28o
 twitter:
-  bearer: AAAAAAAAAAAAAAAAAAAAAFn7TQEAAAAAmKfQAD%2ByglI%2B0EoB%2FHH%2FY8GoRQQ%3DNyE6LRivD3idEo6Pibk3fIF3uxwKkmvRydwnqVJ6fLVKGo6M9X
+  endPoint: https://api.twitter.com/2/users/by/username/
+  bearerToken: AAAAAAAAAAAAAAAAAAAAAFn7TQEAAAAAmKfQAD%2ByglI%2B0EoB%2FHH%2FY8GoRQQ%3DNyE6LRivD3idEo6Pibk3fIF3uxwKkmvRydwnqVJ6fLVKGo6M9X
 
 
