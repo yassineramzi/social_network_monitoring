@@ -55,16 +55,15 @@ public class StatisticsBatch {
                             profilStatistique.setNombreFollowersYoutube(youtubeStatistics != null ? youtubeStatistics.getSubscriberCount() : null);
                             profilStatistique.setNombreVuesYoutube(youtubeStatistics != null ? youtubeStatistics.getViewCount() : null);
                         }
-                        /*
                         if (!StringUtils.isBlank(profil.getLienTwitter())) {
                             profilStatistique.setNombreFollowersTwitter(this.twitterStaticticsService.getTwitterStatisticsByProfil(profil));
-                        }*/
+                        }
                         /*
                         if (!StringUtils.isBlank(profil.getLienInstagram())) {
                             profilStatistique.setNombreFollowersInstagram(this.instagramStatisticsService.getInstagramStatisticsByProfil(profil));
                         }*/
                         this.profilStatistiqueRepository.save(profilStatistique);
-                    } catch(IOException exception) {
+                    } catch(Exception exception) {
                         log.error("Une erreur est survenue lors de la récupération des données pour le compte " + profil.getNom() + " : " + exception.getMessage());
                     }
                 }
