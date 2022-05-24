@@ -1,21 +1,21 @@
 version: '2'
 services:
-  seaevent-app:
-    image: registry.hub.docker.com/yassineramzi/sea_event
+  socialnetworkmonitoring-app:
+    image: registry.hub.docker.com/socialmonitoring20/socialnetworkmonitoring
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
-      - SPRING_PROFILES_ACTIVE=prod,swagger
-      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
-      - SPRING_DATASOURCE_URL=jdbc:mariadb://seaevent-mariadb:3306/seaevent
+      - SPRING_PROFILES_ACTIVE=portainer
     ports:
-      - 8080:8080
-  seaevent-mariadb:
-    extends:
-      file: mariadb.yml
-      service: seaevent-mariadb
-  keycloak:
-    extends:
-      file: keycloak.yml
-      service: keycloak
+      - 9922:8080
+  social-database:
+    image: 'postgres:latest'
+    expose:
+      - 5432
+    environment:
+      POSTGRES_USER: root_soci@l_mo_user
+      POSTGRES_PASSWORD: root_soci@l_mo_p@5sWord
+      POSTGRES_DB: social-monitoring-database
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data/
 
 
