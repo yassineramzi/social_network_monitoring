@@ -58,6 +58,8 @@ public class StatisticsBatch {
                         if (!StringUtils.isBlank(profil.getLienTwitter())) {
                             profilStatistique.setNombreFollowersTwitter(this.twitterStaticticsService.getTwitterStatisticsByProfil(profil));
                         }
+                        // https://stackoverflow.com/questions/63709996/how-to-get-instagram-follower-count-from-instagram-public-account-after-2020-ins
+                        // https://www.edureka.co/community/358/how-to-execute-a-python-file-with-few-arguments-in-java#:~:text=You%20can%20use%20Java%20Runtime,and%20then%20set%20it%20executable.&text=Hope%20this%20helps%20and%20if,learn%20about%20Java%20in%20detail.
                         /*
                         if (!StringUtils.isBlank(profil.getLienInstagram())) {
                             profilStatistique.setNombreFollowersInstagram(this.instagramStatisticsService.getInstagramStatisticsByProfil(profil));
