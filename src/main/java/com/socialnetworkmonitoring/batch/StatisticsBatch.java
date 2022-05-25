@@ -42,7 +42,7 @@ public class StatisticsBatch {
         this.instagramStatisticsService = instagramStatisticsService;
     }
 
-    @Scheduled(cron = "00 2 * * * *")
+    @Scheduled(cron = "0 */2 * ? * *")
     public void getProfilStatistics() {
         this.profilRepository.findAll().parallelStream().forEach(
                 profil -> {
