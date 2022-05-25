@@ -6,7 +6,7 @@ services:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=portainer
     ports:
-      - 9922:8080
+      - 9922:8000
   social-database:
     image: 'postgres:latest'
     expose:
