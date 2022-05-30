@@ -42,7 +42,7 @@ public class StatisticsBatch {
         this.instagramStatisticsService = instagramStatisticsService;
     }
 
-    @Scheduled(cron = "0 */2 * ? * *")
+    @Scheduled(cron = "* 0 1 * * *")
     public void getProfilStatistics() {
         this.profilRepository.findAll().parallelStream().forEach(
                 profil -> {
@@ -58,10 +58,6 @@ public class StatisticsBatch {
                         if (!StringUtils.isBlank(profil.getLienTwitter())) {
                             profilStatistique.setNombreFollowersTwitter(this.twitterStaticticsService.getTwitterStatisticsByProfil(profil));
                         }
-                        /*
-                        if (!StringUtils.isBlank(profil.getLienInstagram())) {
-                            profilStatistique.setNombreFollowersInstagram(this.instagramStatisticsService.getInstagramStatisticsByProfil(profil));
-                        }*/
                         this.profilStatistiqueRepository.save(profilStatistique);
                     } catch(Exception exception) {
                         log.error("Une erreur est survenue lors de la récupération des données pour le compte " + profil.getNom() + " : " + exception.getMessage());
