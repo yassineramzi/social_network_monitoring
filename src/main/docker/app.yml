@@ -1,5 +1,7 @@
 version: '2'
 services:
+  instagramfollower-batch:
+    image: registry.hub.docker.com/socialmonitoring20/instagram_scrapper
   socialnetworkmonitoring-app:
     image: registry.hub.docker.com/socialmonitoring20/socialnetworkmonitoring
     environment:
