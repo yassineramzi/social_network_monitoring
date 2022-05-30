@@ -39,5 +39,9 @@ Then run:
 
 ## To test Application
 
-http://194.163.143.239:9922/
+    http://194.163.143.239:9922/
+
+## To connect to database
+
+    psql -h <host_name> -d <database_name> -U <username>
 
