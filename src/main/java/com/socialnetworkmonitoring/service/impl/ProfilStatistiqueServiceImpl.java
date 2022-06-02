@@ -86,8 +86,8 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
             Map<String,List<BigInteger>> dataByProfile = new HashMap<>();
             for(Map.Entry<Date,Map<String, List<ProfilStatistique>>> entry : statistiqueByProfilAndDate.entrySet()) {
                 for(Map.Entry<String,List<ProfilStatistique>> entry1 : entry.getValue().entrySet()) {
-                    List<BigInteger> data = CollectionUtils.isEmpty(dataByProfile.get(entry1.getKey())) ? dataByProfile.get(entry1.getKey()): new ArrayList<>();
-                    data.add((CollectionUtils.isEmpty(entry1.getValue()) ? new BigInteger("0") : entry1.getValue().get(0).getNombreVuesYoutube()));
+                    List<BigInteger> data = !CollectionUtils.isEmpty(dataByProfile.get(entry1.getKey())) ? dataByProfile.get(entry1.getKey()): new ArrayList<>();
+                    data.add((CollectionUtils.isEmpty(entry1.getValue()) ? null : entry1.getValue().get(0).getNombreVuesYoutube()));
                     dataByProfile.put(entry1.getKey(),data);
                 }
             }
