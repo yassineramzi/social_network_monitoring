@@ -33,6 +33,14 @@ const NavigationItems = [
     icon: 'feather icon-align-left',
     children: [
       {
+        id: 'dashboard',
+        title: 'Dashboard',
+        type: 'item',
+        url: '/dashboard-page',
+        classes: 'nav-item',
+        icon: 'feather icon-home',
+      },
+      {
         id: 'dossiers-sociaux-page',
         title: 'Dossiers Sociaux',
         type: 'item',

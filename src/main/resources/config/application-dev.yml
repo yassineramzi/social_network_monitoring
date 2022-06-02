@@ -29,9 +29,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mariadb://167.86.91.233:8033/socialnetworkmonitoring?useLegacyDatetimeCode=false&serverTimezone=UTC
+    url: jdbc:h2:file:./target/h2db/db/socialnetworkmonitoring
     username: root
-    password:
+    password: root
     hikari:
       poolName: Hikari
       auto-commit: false

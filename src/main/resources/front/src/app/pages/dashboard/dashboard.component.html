@@ -1,0 +1,26 @@
+<div class="row">
+    <!-- account-section start -->
+    <div class="col-xl-6 col-md-12">
+      <app-card cardTitle="Followers Instagram" [options]="false">
+        <app-apex-chart chartID="instagram-followers" [chartConfig]="instagramFollowersConfig"></app-apex-chart>
+      </app-card>
+    </div>
+    <div class="col-xl-6 col-md-12">
+      <app-card cardTitle="Followers Twitter" [options]="false">
+        <app-apex-chart chartID="twitter-followers" [chartConfig]="twitterFollowersConfig"></app-apex-chart>
+      </app-card>
+    </div>
+    <!-- account-section end -->
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <app-card cardTitle="Vues Youtube" [options]="false">
+      <app-apex-chart chartID="youtube-views" [chartConfig]="youtubeViewsConfig"></app-apex-chart>
+    </app-card>
+  </div>
+  <div class="col-md-6">
+    <app-card cardTitle="Subscribers Youtube"  [options]="false">
+      <app-apex-chart chartID="youtube-subscribers" [chartConfig]="youtubeSubscribersConfig"></app-apex-chart>
+    </app-card>
+  </div>
+</div>

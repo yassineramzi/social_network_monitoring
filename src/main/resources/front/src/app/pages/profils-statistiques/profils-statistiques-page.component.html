@@ -14,9 +14,6 @@
                         <span class="d-flex justify-content-center">Date</span>
                       </th>
                       <th scope="col">
-                        <span class="d-flex justify-content-center">Fans (Fb)</span>
-                      </th>
-                      <th scope="col">
                         <span class="d-flex justify-content-center">Followers (Tw)</span>
                       </th>
                       <th scope="col">
@@ -38,10 +35,7 @@
                     </tr>
                     <tr *ngFor="let profilStatistique of profilsStatistiquesArrayPage">
                       <td>
-                        <span class="d-flex justify-content-center">{{profilStatistique.dateStatistique | date:'MM/dd/yyyy hh:mm'}}</span>
-                      </td>
-                      <td>
-                        <span class="d-flex justify-content-center">{{profilStatistique.nombreFollowersFacebook}}</span>
+                        <span class="d-flex justify-content-center">{{profilStatistique.dateStatistique | date:'MM/dd/yyyy'}}</span>
                       </td>
                       <td>
                         <span class="d-flex justify-content-center">{{profilStatistique.nombreFollowersTwitter}}</span>
@@ -62,9 +56,9 @@
                   <ngb-pagination [collectionSize]="profilsStatistiquesCollectionSize" [(page)]="profilsStatistiquesPage" [pageSize]="pageSize" (pageChange)="refreshProfilsStatistiques()">
                   </ngb-pagination>
                   <select class="custom-select" style="width: auto" formControlName="pageSize" (change)="refreshProfilsStatistiques()">
-                    <option [ngValue]="2">2 résultats par page</option>
-                    <option [ngValue]="4">4 résultats par page</option>
-                    <option [ngValue]="6">6 résultats par page</option>
+                    <option [ngValue]="5">5 résultats par page</option>
+                    <option [ngValue]="15">15 résultats par page</option>
+                    <option [ngValue]="25">25 résultats par page</option>
                   </select>
                 </div> 
               </div>

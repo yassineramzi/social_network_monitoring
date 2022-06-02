@@ -28,6 +28,7 @@
     "@fullcalendar/timegrid": "^5.1.0",
     "@iplab/ngx-file-upload": "^2.0.6",
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
+    "@swimlane/ngx-charts": "^20.1.0",
     "amazing-time-picker": "^1.8.0",
     "angular-archwizard": "^6.1.0",
     "angular-datatables": "^9.0.2",

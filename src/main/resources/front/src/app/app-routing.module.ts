@@ -39,6 +39,10 @@ const routes: Routes = [
       {
         path: 'profils-statistiques-page',
         loadChildren: () => import('@pages/profils-statistiques/profils-statistiques-page.module').then(module => module.ProfilsStatistiquesPageModule)
+      },
+      {
+        path: 'dashboard-page',
+        loadChildren: () => import('@pages/dashboard/dashboard.module').then(module => module.DashBoardModule)
       }
     ]
   }

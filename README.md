@@ -43,5 +43,5 @@ Then run:
 
 ## To connect to database
 
-    psql -h <host_name> -d <database_name> -U <username>
+    psql -h 192.168.0.2 -d social-monitoring-database -U root_soci@l_mo_user
 

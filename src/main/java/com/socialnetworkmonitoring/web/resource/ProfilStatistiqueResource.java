@@ -2,6 +2,7 @@ package com.socialnetworkmonitoring.web.resource;
 
 import com.socialnetworkmonitoring.service.ProfilStatistiqueService;
 import com.socialnetworkmonitoring.service.dto.ProfilStatistiqueDTO;
+import com.socialnetworkmonitoring.service.dto.StatisticDataDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,11 @@ public class ProfilStatistiqueResource {
     public ResponseEntity<List<ProfilStatistiqueDTO>> findByProfilId(@PathVariable("idProfil") Long idProfil) {
         log.info("Récupération de toutes les statistiques, du profil : "+idProfil);
         return ResponseEntity.ok(this.profilStatistiqueService.findProfilStatistiquesByIdProfil(idProfil));
+    }
+
+    @GetMapping("/youtube/views")
+    public ResponseEntity<StatisticDataDTO> findAllYoutubeViewsStatisticSet(){
+        log.info("Récupération de toutes les statistiques, des vues Youtube");
+        return ResponseEntity.ok(this.profilStatistiqueService.findAllYoutubeViewsStatisticSet());
     }
 }

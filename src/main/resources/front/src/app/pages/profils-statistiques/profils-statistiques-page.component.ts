@@ -20,7 +20,7 @@ export class ProfilsStatistiquesPageComponent implements OnInit {
 
   public paginationForm: FormGroup = this.formBuilder.group(
     {
-      pageSize : new FormControl(6)
+      pageSize : new FormControl(5)
     }
   );
 
