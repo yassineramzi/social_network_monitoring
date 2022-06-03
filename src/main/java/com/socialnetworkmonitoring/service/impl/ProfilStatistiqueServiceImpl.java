@@ -65,10 +65,16 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
         StatisticDataDTO statisticDataDTO = new StatisticDataDTO(new ArrayList<>(), new ArrayList<>());
         List<ProfilStatistique> profilStatistiqueList = this.profilStatistiqueRepository.findAll();
         if(!CollectionUtils.isEmpty(profilStatistiqueList)) {
+            // Sort data by date
+            Comparator<ProfilStatistique> reverseComparator = (c1, c2) -> {
+                return c2.getDateStatistique().compareTo(c1.getDateStatistique());
+            };
+            Collections.sort(profilStatistiqueList, reverseComparator);
             // Préparation des données
                 // 1- Groupe les données par date
-            Map<Date,List<ProfilStatistique>> statistiqueMap = profilStatistiqueList.stream().
-                    collect(
+            Map<Date,List<ProfilStatistique>> statistiqueMap = profilStatistiqueList
+                    .stream()
+                    .collect(
                             groupingBy(
                                 ProfilStatistique::getDateStatistique
             ));

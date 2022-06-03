@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { ProfilStatistique } from '@models/profilStatistique.model';
+import { ProfilStatistique } from '@models/profilStatistique.model'; 
+import StatisticData from '@models/statisticData.model';
 import { environment } from "@environments/environment";
-
-type EntityArrayResponseType = HttpResponse<ProfilStatistique[]>;
 
 @Injectable({
     providedIn: 'root'
@@ -19,7 +18,11 @@ export class ProfilStatistiqueService {
     ) {
     }
 
-    findByIdProfil(id: number): Observable<EntityArrayResponseType> {
+    public findByIdProfil(id: number): Observable<HttpResponse<ProfilStatistique[]>> {
         return this.http.get<ProfilStatistique[]>(`${this.resourceUrl}/${id}`, {observe: 'response'});
+    }
+
+    public findAllYoutubeViewsStatisticSet(): Observable<HttpResponse<StatisticData>> {
+        return this.http.get<StatisticData>(`${this.resourceUrl}/youtube/views`, {observe: 'response'});
     }
 }
