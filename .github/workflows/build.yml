@@ -30,7 +30,7 @@ jobs:
       - name : install Node and npm
         uses: actions/setup-node@v1 #this will install Node and npm on Ubuntu
         with:
-          node-version: '12.x'  
+          node-version: '16.x'
       - name: Build application Front
         run:  |
           cd src/main/resources/front
