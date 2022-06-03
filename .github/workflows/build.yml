@@ -29,6 +29,8 @@ jobs:
           java-version: 1.11
       - name : install Node and npm
         uses: actions/setup-node@v3
+        with:
+          node-version: 14
       - name: Build application Front
         run:  |
           cd src/main/resources/front
@@ -41,4 +43,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build application Backend
         run:  |
-          mvnw clean compile jib:build -Dmode=portainer
+          ./mvnw clean compile jib:build -Dmode=portainer
