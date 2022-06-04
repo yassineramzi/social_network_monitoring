@@ -42,4 +42,6 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build application Backend
         run:  |
-          mvn clean compile jib:build -Dmode=portainer
+          ls -l
+          chmod +x ./mvnw
+          ./mvnw clean compile jib:build -Dmode=portainer
