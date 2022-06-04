@@ -17,6 +17,9 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: self-hosted
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x, 15.x]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -31,10 +34,12 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      - name : install Node and npm
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
       - name: Build application Front
         run:  |
           cd src/main/resources/front
