@@ -41,7 +41,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Setup Maven Action
-        uses: s4u/setup-maven-action@3.8.5
+        uses: s4u/setup-maven-action@1.4.0
         with:
           java-version: 11
       - name: Build application Backend
