@@ -79,7 +79,7 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
                                 ProfilStatistique::getDateStatistique
             ));
                 // 2- Groupe les données par profil
-            Map<Date,Map<String, List<ProfilStatistique>>> statistiqueByProfilAndDate = new HashMap<>();
+            TreeMap<Date,Map<String, List<ProfilStatistique>>> statistiqueByProfilAndDate = new TreeMap<>();
             for(Map.Entry<Date,List<ProfilStatistique>> entry : statistiqueMap.entrySet()) {
                 Map<String, List<ProfilStatistique>> dataByProfile = entry.getValue().stream().collect(
                         groupingBy(
@@ -90,7 +90,7 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
             }
                 // 3- Get Youtube Views
             List<String> labels = new ArrayList<>();
-            Map<String,List<BigInteger>> dataByProfile = new HashMap<>();
+            TreeMap<String,List<BigInteger>> dataByProfile = new TreeMap<>();
             for(Map.Entry<Date,Map<String, List<ProfilStatistique>>> entry : statistiqueByProfilAndDate.entrySet()) {
                 labels.add(entry.getKey().toString());
                 for(Map.Entry<String,List<ProfilStatistique>> entry1 : entry.getValue().entrySet()) {
