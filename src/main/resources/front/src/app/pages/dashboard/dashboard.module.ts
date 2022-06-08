@@ -5,6 +5,7 @@ import { DashBoardRoutingModule } from './dashboard-routing.module';
 import { DashBoardComponent } from './dashboard.component';
 import { SharedModule } from '../../theme/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgApexchartsModule } from "ng-apexcharts";
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    NgApexchartsModule
   ],
   declarations: [
     DashBoardComponent,

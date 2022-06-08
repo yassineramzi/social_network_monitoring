@@ -102,7 +102,6 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
                 StatisticSetDTO statisticSetDTO = new StatisticSetDTO();
                 statisticSetDTO.setName(entry.getKey());
                 statisticSetDTO.setData(entry.getValue());
-                statisticSetDTO.setType("line");
                 statisticDataDTO.getStatisticSet().add((statisticSetDTO));
             }
                 // 5- List of labels

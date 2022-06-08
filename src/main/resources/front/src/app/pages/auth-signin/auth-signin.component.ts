@@ -37,7 +37,7 @@ export class AuthSigninComponent implements OnInit {
    if (this.tokenStorageService.getToken()) {
      this.isLoggedIn = true;
    }
-   this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dossiers-sociaux-page';
+   this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard-page';
  }
 
  public login(): void {

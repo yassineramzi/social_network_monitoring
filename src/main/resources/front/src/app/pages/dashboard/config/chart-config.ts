@@ -21,7 +21,7 @@
           '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001']
  */
 export default class ChartConfig {
-    public static youtubeViewsChart: any = {
+    public youtubeViewsChart: any = {
         chart: {
           height: 300,
           type: 'line',
@@ -60,7 +60,7 @@ export default class ChartConfig {
           }
         }],
         legend: {
-          show: false
+          show: true
         }
     };
 
