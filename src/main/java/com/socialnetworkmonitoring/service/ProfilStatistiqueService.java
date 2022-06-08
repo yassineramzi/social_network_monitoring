@@ -9,4 +9,7 @@ import java.util.List;
 public interface ProfilStatistiqueService {
     List<ProfilStatistiqueDTO> findProfilStatistiquesByIdProfil(Long idProfil);
     StatisticDataDTO findAllYoutubeViewsStatisticSet();
+    StatisticDataDTO findAllYoutubeSubscribersStatisticSet();
+    StatisticDataDTO findAllTwitterFollowersStatisticSet();
+    StatisticDataDTO findAllInstagramFollowersStatisticSet();
 }

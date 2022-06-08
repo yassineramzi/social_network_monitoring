@@ -112,6 +112,162 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
         return statisticDataDTO;
     }
 
+    @Override
+    public StatisticDataDTO findAllYoutubeSubscribersStatisticSet() {
+        StatisticDataDTO statisticDataDTO = new StatisticDataDTO(new ArrayList<>(), new ArrayList<>());
+        List<ProfilStatistique> profilStatistiqueList = this.profilStatistiqueRepository.findAll();
+        if(!CollectionUtils.isEmpty(profilStatistiqueList)) {
+            // Sort data by date
+            Comparator<ProfilStatistique> reverseComparator = (c1, c2) -> {
+                return c2.getDateStatistique().compareTo(c1.getDateStatistique());
+            };
+            Collections.sort(profilStatistiqueList, reverseComparator);
+            // Préparation des données
+            // 1- Groupe les données par date
+            Map<Date,List<ProfilStatistique>> statistiqueMap = profilStatistiqueList
+                    .stream()
+                    .collect(
+                            groupingBy(
+                                    ProfilStatistique::getDateStatistique
+                            ));
+            // 2- Groupe les données par profil
+            TreeMap<Date,Map<String, List<ProfilStatistique>>> statistiqueByProfilAndDate = new TreeMap<>();
+            for(Map.Entry<Date,List<ProfilStatistique>> entry : statistiqueMap.entrySet()) {
+                Map<String, List<ProfilStatistique>> dataByProfile = entry.getValue().stream().collect(
+                        groupingBy(
+                                profilStatistique -> profilStatistique.getProfil().getNom()
+                        )
+                );
+                statistiqueByProfilAndDate.put(entry.getKey(),dataByProfile);
+            }
+            // 3- Get Youtube Views
+            List<String> labels = new ArrayList<>();
+            TreeMap<String,List<BigInteger>> dataByProfile = new TreeMap<>();
+            for(Map.Entry<Date,Map<String, List<ProfilStatistique>>> entry : statistiqueByProfilAndDate.entrySet()) {
+                labels.add(entry.getKey().toString());
+                for(Map.Entry<String,List<ProfilStatistique>> entry1 : entry.getValue().entrySet()) {
+                    List<BigInteger> data = !CollectionUtils.isEmpty(dataByProfile.get(entry1.getKey())) ? dataByProfile.get(entry1.getKey()): new ArrayList<>();
+                    data.add((CollectionUtils.isEmpty(entry1.getValue()) ? null : entry1.getValue().get(0).getNombreFollowersYoutube()));
+                    dataByProfile.put(entry1.getKey(),data);
+                }
+            }
+            // 4- Conversion of data
+            for(Map.Entry<String,List<BigInteger>> entry : dataByProfile.entrySet()) {
+                StatisticSetDTO statisticSetDTO = new StatisticSetDTO();
+                statisticSetDTO.setName(entry.getKey());
+                statisticSetDTO.setData(entry.getValue());
+                statisticDataDTO.getStatisticSet().add((statisticSetDTO));
+            }
+            // 5- List of
+            statisticDataDTO.setLabels(labels.stream().sorted().collect(Collectors.toList()));
+        }
+        return statisticDataDTO;
+    }
+
+    @Override
+    public StatisticDataDTO findAllTwitterFollowersStatisticSet() {
+        StatisticDataDTO statisticDataDTO = new StatisticDataDTO(new ArrayList<>(), new ArrayList<>());
+        List<ProfilStatistique> profilStatistiqueList = this.profilStatistiqueRepository.findAll();
+        if(!CollectionUtils.isEmpty(profilStatistiqueList)) {
+            // Sort data by date
+            Comparator<ProfilStatistique> reverseComparator = (c1, c2) -> {
+                return c2.getDateStatistique().compareTo(c1.getDateStatistique());
+            };
+            Collections.sort(profilStatistiqueList, reverseComparator);
+            // Préparation des données
+            // 1- Groupe les données par date
+            Map<Date,List<ProfilStatistique>> statistiqueMap = profilStatistiqueList
+                    .stream()
+                    .collect(
+                            groupingBy(
+                                    ProfilStatistique::getDateStatistique
+                            ));
+            // 2- Groupe les données par profil
+            TreeMap<Date,Map<String, List<ProfilStatistique>>> statistiqueByProfilAndDate = new TreeMap<>();
+            for(Map.Entry<Date,List<ProfilStatistique>> entry : statistiqueMap.entrySet()) {
+                Map<String, List<ProfilStatistique>> dataByProfile = entry.getValue().stream().collect(
+                        groupingBy(
+                                profilStatistique -> profilStatistique.getProfil().getNom()
+                        )
+                );
+                statistiqueByProfilAndDate.put(entry.getKey(),dataByProfile);
+            }
+            // 3- Get Youtube Views
+            List<String> labels = new ArrayList<>();
+            TreeMap<String,List<BigInteger>> dataByProfile = new TreeMap<>();
+            for(Map.Entry<Date,Map<String, List<ProfilStatistique>>> entry : statistiqueByProfilAndDate.entrySet()) {
+                labels.add(entry.getKey().toString());
+                for(Map.Entry<String,List<ProfilStatistique>> entry1 : entry.getValue().entrySet()) {
+                    List<BigInteger> data = !CollectionUtils.isEmpty(dataByProfile.get(entry1.getKey())) ? dataByProfile.get(entry1.getKey()): new ArrayList<>();
+                    data.add((CollectionUtils.isEmpty(entry1.getValue()) ? null : entry1.getValue().get(0).getNombreFollowersTwitter()));
+                    dataByProfile.put(entry1.getKey(),data);
+                }
+            }
+            // 4- Conversion of data
+            for(Map.Entry<String,List<BigInteger>> entry : dataByProfile.entrySet()) {
+                StatisticSetDTO statisticSetDTO = new StatisticSetDTO();
+                statisticSetDTO.setName(entry.getKey());
+                statisticSetDTO.setData(entry.getValue());
+                statisticDataDTO.getStatisticSet().add((statisticSetDTO));
+            }
+            // 5- List of
+            statisticDataDTO.setLabels(labels.stream().sorted().collect(Collectors.toList()));
+        }
+        return statisticDataDTO;
+    }
+
+    @Override
+    public StatisticDataDTO findAllInstagramFollowersStatisticSet() {
+        StatisticDataDTO statisticDataDTO = new StatisticDataDTO(new ArrayList<>(), new ArrayList<>());
+        List<ProfilStatistique> profilStatistiqueList = this.profilStatistiqueRepository.findAll();
+        if(!CollectionUtils.isEmpty(profilStatistiqueList)) {
+            // Sort data by date
+            Comparator<ProfilStatistique> reverseComparator = (c1, c2) -> {
+                return c2.getDateStatistique().compareTo(c1.getDateStatistique());
+            };
+            Collections.sort(profilStatistiqueList, reverseComparator);
+            // Préparation des données
+            // 1- Groupe les données par date
+            Map<Date,List<ProfilStatistique>> statistiqueMap = profilStatistiqueList
+                    .stream()
+                    .collect(
+                            groupingBy(
+                                    ProfilStatistique::getDateStatistique
+                            ));
+            // 2- Groupe les données par profil
+            TreeMap<Date,Map<String, List<ProfilStatistique>>> statistiqueByProfilAndDate = new TreeMap<>();
+            for(Map.Entry<Date,List<ProfilStatistique>> entry : statistiqueMap.entrySet()) {
+                Map<String, List<ProfilStatistique>> dataByProfile = entry.getValue().stream().collect(
+                        groupingBy(
+                                profilStatistique -> profilStatistique.getProfil().getNom()
+                        )
+                );
+                statistiqueByProfilAndDate.put(entry.getKey(),dataByProfile);
+            }
+            // 3- Get Youtube Views
+            List<String> labels = new ArrayList<>();
+            TreeMap<String,List<BigInteger>> dataByProfile = new TreeMap<>();
+            for(Map.Entry<Date,Map<String, List<ProfilStatistique>>> entry : statistiqueByProfilAndDate.entrySet()) {
+                labels.add(entry.getKey().toString());
+                for(Map.Entry<String,List<ProfilStatistique>> entry1 : entry.getValue().entrySet()) {
+                    List<BigInteger> data = !CollectionUtils.isEmpty(dataByProfile.get(entry1.getKey())) ? dataByProfile.get(entry1.getKey()): new ArrayList<>();
+                    data.add((CollectionUtils.isEmpty(entry1.getValue()) ? null : entry1.getValue().get(0).getNombreFollowersInstagram()));
+                    dataByProfile.put(entry1.getKey(),data);
+                }
+            }
+            // 4- Conversion of data
+            for(Map.Entry<String,List<BigInteger>> entry : dataByProfile.entrySet()) {
+                StatisticSetDTO statisticSetDTO = new StatisticSetDTO();
+                statisticSetDTO.setName(entry.getKey());
+                statisticSetDTO.setData(entry.getValue());
+                statisticDataDTO.getStatisticSet().add((statisticSetDTO));
+            }
+            // 5- List of
+            statisticDataDTO.setLabels(labels.stream().sorted().collect(Collectors.toList()));
+        }
+        return statisticDataDTO;
+    }
+
     private static ProfilStatistiqueDTO getNombreFollowers(List<ProfilStatistiqueDTO> profilStatistiqueDTOS, Predicate<ProfilStatistiqueDTO> predicate) {
         List<ProfilStatistiqueDTO> profilStatistiqueDTOListTemp = profilStatistiqueDTOS
                 .stream()

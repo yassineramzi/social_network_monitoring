@@ -2,12 +2,30 @@
     <!-- account-section start -->
     <div class="col-xl-6 col-md-12">
       <app-card cardTitle="Followers Instagram" [options]="false">
-        
+        <div id="chart-instagram-followers">
+          <apx-chart
+            [series]="chartOptionsInstagramFollowers.series"
+            [chart]="chartOptionsInstagramFollowers.chart"
+            [xaxis]="chartOptionsInstagramFollowers.xaxis"
+            [stroke]="chartOptionsInstagramFollowers.stroke"
+            [tooltip]="chartOptionsInstagramFollowers.tooltip"
+            [dataLabels]="chartOptionsInstagramFollowers.dataLabels"
+          ></apx-chart>
+        </div>
       </app-card>
     </div>
     <div class="col-xl-6 col-md-12">
       <app-card cardTitle="Followers Twitter" [options]="false">
-       
+        <div id="chart-twitter-followers">
+          <apx-chart
+            [series]="chartOptionsTwitterFollowers.series"
+            [chart]="chartOptionsTwitterFollowers.chart"
+            [xaxis]="chartOptionsTwitterFollowers.xaxis"
+            [stroke]="chartOptionsTwitterFollowers.stroke"
+            [tooltip]="chartOptionsTwitterFollowers.tooltip"
+            [dataLabels]="chartOptionsTwitterFollowers.dataLabels"
+          ></apx-chart>
+        </div>
       </app-card>
     </div>
     <!-- account-section end -->
@@ -15,7 +33,7 @@
 <div class="row">
   <div class="col-md-6">
     <app-card cardTitle="Vues Youtube" [options]="false">
-      <div id="chart">
+      <div id="chart-youtube-views">
         <apx-chart
           [series]="chartOptionsYoutubeViews.series"
           [chart]="chartOptionsYoutubeViews.chart"
@@ -29,7 +47,16 @@
   </div>
   <div class="col-md-6">
     <app-card cardTitle="Subscribers Youtube"  [options]="false">
-      
+      <div id="chart-youtube-subscribers">
+        <apx-chart
+          [series]="chartOptionsYoutubeSubscribers.series"
+          [chart]="chartOptionsYoutubeSubscribers.chart"
+          [xaxis]="chartOptionsYoutubeSubscribers.xaxis"
+          [stroke]="chartOptionsYoutubeSubscribers.stroke"
+          [tooltip]="chartOptionsYoutubeSubscribers.tooltip"
+          [dataLabels]="chartOptionsYoutubeSubscribers.dataLabels"
+        ></apx-chart>
+      </div>
     </app-card>
   </div>
 </div>

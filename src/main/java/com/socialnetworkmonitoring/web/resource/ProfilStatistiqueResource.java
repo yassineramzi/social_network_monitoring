@@ -40,4 +40,22 @@ public class ProfilStatistiqueResource {
         log.info("Récupération de toutes les statistiques, des vues Youtube");
         return ResponseEntity.ok(this.profilStatistiqueService.findAllYoutubeViewsStatisticSet());
     }
+
+    @GetMapping("/youtube/subscribers")
+    public ResponseEntity<StatisticDataDTO> findAllYoutubeSubscribersStatisticSet(){
+        log.info("Récupération de toutes les statistiques, des abonnés Youtube");
+        return ResponseEntity.ok(this.profilStatistiqueService.findAllYoutubeSubscribersStatisticSet());
+    }
+
+    @GetMapping("/twitter/followers")
+    public ResponseEntity<StatisticDataDTO> findAllTwitterFollowersStatisticSet(){
+        log.info("Récupération de toutes les statistiques, des followers Twitter");
+        return ResponseEntity.ok(this.profilStatistiqueService.findAllTwitterFollowersStatisticSet());
+    }
+
+    @GetMapping("/instagram/followers")
+    public ResponseEntity<StatisticDataDTO> findAllInstagramFollowersStatisticSet(){
+        log.info("Récupération de toutes les statistiques, des followers Instagram");
+        return ResponseEntity.ok(this.profilStatistiqueService.findAllInstagramFollowersStatisticSet());
+    }
 }

@@ -25,4 +25,16 @@ export class ProfilStatistiqueService {
     public findAllYoutubeViewsStatisticSet(): Observable<HttpResponse<StatisticData>> {
         return this.http.get<StatisticData>(`${this.resourceUrl}/youtube/views`, {observe: 'response'});
     }
+
+    public findAllYoutubeSubscribersStatisticSet(): Observable<HttpResponse<StatisticData>> {
+        return this.http.get<StatisticData>(`${this.resourceUrl}/youtube/subscribers`, {observe: 'response'});
+    }
+
+    public findAllTwitterFollowersStatisticSet(): Observable<HttpResponse<StatisticData>> {
+        return this.http.get<StatisticData>(`${this.resourceUrl}/twitter/followers`, {observe: 'response'});
+    }
+
+    public findAllInstagramFollowersStatisticSet(): Observable<HttpResponse<StatisticData>> {
+        return this.http.get<StatisticData>(`${this.resourceUrl}/instagram/followers`, {observe: 'response'});
+    }
 }

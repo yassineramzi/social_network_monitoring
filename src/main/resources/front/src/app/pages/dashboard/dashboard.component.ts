@@ -27,11 +27,89 @@ export type ChartOptions = {
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashBoardComponent implements OnInit {
-  @ViewChild("chart") chart: ChartComponent;
+  @ViewChild("chart-youtube-views") chartYoutubeViews: ChartComponent;
   public chartOptionsYoutubeViews: Partial<ChartOptions>;
+
+  @ViewChild("chart-youtube-subscribers") chartYoutubeSubscribers: ChartComponent;
+  public chartOptionsYoutubeSubscribers: Partial<ChartOptions>;
+
+  @ViewChild("chart-twitter-followers") chartTwitterFollowers: ChartComponent;
+  public chartOptionsTwitterFollowers: Partial<ChartOptions>;
+
+  @ViewChild("chart-instagram-followers") chartInstagramFollowers: ChartComponent;
+  public chartOptionsInstagramFollowers: Partial<ChartOptions>;
 
   public constructor(protected profilStatistiqueService: ProfilStatistiqueService){
     this.chartOptionsYoutubeViews = {
+      series: [
+      ],
+      chart: {
+        height: 350,
+        type: "area"
+      },
+      dataLabels: {
+        enabled: true
+      },
+      stroke: {
+        curve: "smooth"
+      },
+      xaxis: {
+        type: "datetime"
+      },
+      tooltip: {
+        x: {
+          format: "dd/MM/yy HH:mm"
+        }
+      }
+    };
+
+    this.chartOptionsYoutubeSubscribers = {
+      series: [
+      ],
+      chart: {
+        height: 350,
+        type: "area"
+      },
+      dataLabels: {
+        enabled: true
+      },
+      stroke: {
+        curve: "smooth"
+      },
+      xaxis: {
+        type: "datetime"
+      },
+      tooltip: {
+        x: {
+          format: "dd/MM/yy HH:mm"
+        }
+      }
+    };
+
+    this.chartOptionsTwitterFollowers = {
+      series: [
+      ],
+      chart: {
+        height: 350,
+        type: "area"
+      },
+      dataLabels: {
+        enabled: true
+      },
+      stroke: {
+        curve: "smooth"
+      },
+      xaxis: {
+        type: "datetime"
+      },
+      tooltip: {
+        x: {
+          format: "dd/MM/yy HH:mm"
+        }
+      }
+    };
+
+    this.chartOptionsInstagramFollowers = {
       series: [
       ],
       chart: {
@@ -59,6 +137,87 @@ export class DashBoardComponent implements OnInit {
     this.profilStatistiqueService.findAllYoutubeViewsStatisticSet().subscribe(
       (response : HttpResponse<StatisticData>) => {
         this.chartOptionsYoutubeViews = {
+          series: response.body.statisticSet,
+          chart: {
+            height: 350,
+            type: "area"
+          },
+          dataLabels: {
+            enabled: false
+          },
+          stroke: {
+            curve: "smooth"
+          },
+          xaxis: {
+            type: "datetime",
+            categories: response.body.labels
+          },
+          tooltip: {
+            x: {
+              format: "dd/MM/yy HH:mm"
+            }
+          }
+        };
+      }
+    );
+    // Instagram Followers
+    this.profilStatistiqueService.findAllInstagramFollowersStatisticSet().subscribe(
+      (response : HttpResponse<StatisticData>) => {
+        this.chartOptionsInstagramFollowers = {
+          series: response.body.statisticSet,
+          chart: {
+            height: 350,
+            type: "area"
+          },
+          dataLabels: {
+            enabled: false
+          },
+          stroke: {
+            curve: "smooth"
+          },
+          xaxis: {
+            type: "datetime",
+            categories: response.body.labels
+          },
+          tooltip: {
+            x: {
+              format: "dd/MM/yy HH:mm"
+            }
+          }
+        };
+      }
+    );
+    // Youtube Subscribers
+    this.profilStatistiqueService.findAllYoutubeSubscribersStatisticSet().subscribe(
+      (response : HttpResponse<StatisticData>) => {
+        this.chartOptionsYoutubeSubscribers = {
+          series: response.body.statisticSet,
+          chart: {
+            height: 350,
+            type: "area"
+          },
+          dataLabels: {
+            enabled: false
+          },
+          stroke: {
+            curve: "smooth"
+          },
+          xaxis: {
+            type: "datetime",
+            categories: response.body.labels
+          },
+          tooltip: {
+            x: {
+              format: "dd/MM/yy HH:mm"
+            }
+          }
+        };
+      }
+    );
+    // Twitter Followers
+    this.profilStatistiqueService.findAllTwitterFollowersStatisticSet().subscribe(
+      (response : HttpResponse<StatisticData>) => {
+        this.chartOptionsTwitterFollowers = {
           series: response.body.statisticSet,
           chart: {
             height: 350,
