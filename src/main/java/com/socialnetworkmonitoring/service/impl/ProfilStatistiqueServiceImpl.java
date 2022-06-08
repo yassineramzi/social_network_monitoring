@@ -89,8 +89,10 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
                 statistiqueByProfilAndDate.put(entry.getKey(),dataByProfile);
             }
                 // 3- Get Youtube Views
+            List<String> labels = new ArrayList<>();
             Map<String,List<BigInteger>> dataByProfile = new HashMap<>();
             for(Map.Entry<Date,Map<String, List<ProfilStatistique>>> entry : statistiqueByProfilAndDate.entrySet()) {
+                labels.add(entry.getKey().toString());
                 for(Map.Entry<String,List<ProfilStatistique>> entry1 : entry.getValue().entrySet()) {
                     List<BigInteger> data = !CollectionUtils.isEmpty(dataByProfile.get(entry1.getKey())) ? dataByProfile.get(entry1.getKey()): new ArrayList<>();
                     data.add((CollectionUtils.isEmpty(entry1.getValue()) ? null : entry1.getValue().get(0).getNombreVuesYoutube()));
@@ -105,9 +107,6 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
                 statisticDataDTO.getStatisticSet().add((statisticSetDTO));
             }
                 // 5- List of labels
-            List<String> labels = statistiqueByProfilAndDate.keySet().stream().map(
-                    Date::toString
-            ).collect(Collectors.toList());
             statisticDataDTO.setLabels(labels);
         }
         return statisticDataDTO;
