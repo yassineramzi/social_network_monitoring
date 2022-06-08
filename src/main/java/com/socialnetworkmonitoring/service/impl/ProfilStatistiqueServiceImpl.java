@@ -106,8 +106,8 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
                 statisticSetDTO.setData(entry.getValue());
                 statisticDataDTO.getStatisticSet().add((statisticSetDTO));
             }
-                // 5- List of labels
-            statisticDataDTO.setLabels(labels);
+                // 5- List of
+            statisticDataDTO.setLabels(labels.stream().sorted().collect(Collectors.toList()));
         }
         return statisticDataDTO;
     }
