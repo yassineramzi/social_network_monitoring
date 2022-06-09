@@ -66,7 +66,7 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
         if(!CollectionUtils.isEmpty(profilStatistiqueList)) {
             // Sort data by date
             Comparator<ProfilStatistique> reverseComparator = (c1, c2) -> c2.getDateStatistique().compareTo(c1.getDateStatistique());
-            Collections.sort(profilStatistiqueList, reverseComparator);
+            profilStatistiqueList.sort(reverseComparator);
             // Préparation des données
             // 1- Groupe les données par date
             Map<Date,List<ProfilStatistique>> statistiqueMap = profilStatistiqueList
@@ -90,11 +90,14 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
             for(Map.Entry<Date,Map<String, List<ProfilStatistique>>> entry : statistiqueByProfilAndDate.entrySet()) {
                 for(Map.Entry<String,List<ProfilStatistique>> entry1 : entry.getValue().entrySet()) {
                     List<StatisticDataDTO> data = !CollectionUtils.isEmpty(dataByProfile.get(entry1.getKey())) ? dataByProfile.get(entry1.getKey()): new ArrayList<>();
-                    ProfilStatistique profilStatistiqueTemp = entry1.getValue().get(0);
+                    ProfilStatistique profilStatistiqueTemp = getProfilStatistiqueFromListByPredicate(
+                            entry1.getValue(),
+                            profilStatistique -> profilStatistique.getNombreVuesYoutube()!=null
+                    );
                     if(profilStatistiqueTemp!=null) {
                         data.add(new StatisticDataDTO(
                                 profilStatistiqueTemp.getDateStatistique().toString(),
-                                profilStatistiqueTemp.getNombreFollowersInstagram()
+                                profilStatistiqueTemp.getNombreVuesYoutube()
                         ));
                     }
                     dataByProfile.put(entry1.getKey(),data);
@@ -118,7 +121,7 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
         if(!CollectionUtils.isEmpty(profilStatistiqueList)) {
             // Sort data by date
             Comparator<ProfilStatistique> reverseComparator = (c1, c2) -> c2.getDateStatistique().compareTo(c1.getDateStatistique());
-            Collections.sort(profilStatistiqueList, reverseComparator);
+            profilStatistiqueList.sort(reverseComparator);
             // Préparation des données
             // 1- Groupe les données par date
             Map<Date,List<ProfilStatistique>> statistiqueMap = profilStatistiqueList
@@ -142,11 +145,14 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
             for(Map.Entry<Date,Map<String, List<ProfilStatistique>>> entry : statistiqueByProfilAndDate.entrySet()) {
                 for(Map.Entry<String,List<ProfilStatistique>> entry1 : entry.getValue().entrySet()) {
                     List<StatisticDataDTO> data = !CollectionUtils.isEmpty(dataByProfile.get(entry1.getKey())) ? dataByProfile.get(entry1.getKey()): new ArrayList<>();
-                    ProfilStatistique profilStatistiqueTemp = entry1.getValue().get(0);
+                    ProfilStatistique profilStatistiqueTemp = getProfilStatistiqueFromListByPredicate(
+                            entry1.getValue(),
+                            profilStatistique -> profilStatistique.getNombreFollowersYoutube()!=null
+                    );
                     if(profilStatistiqueTemp!=null) {
                         data.add(new StatisticDataDTO(
                                 profilStatistiqueTemp.getDateStatistique().toString(),
-                                profilStatistiqueTemp.getNombreFollowersInstagram()
+                                profilStatistiqueTemp.getNombreFollowersYoutube()
                         ));
                     }
                     dataByProfile.put(entry1.getKey(),data);
@@ -170,7 +176,7 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
         if(!CollectionUtils.isEmpty(profilStatistiqueList)) {
             // Sort data by date
             Comparator<ProfilStatistique> reverseComparator = (c1, c2) -> c2.getDateStatistique().compareTo(c1.getDateStatistique());
-            Collections.sort(profilStatistiqueList, reverseComparator);
+            profilStatistiqueList.sort(reverseComparator);
             // Préparation des données
             // 1- Groupe les données par date
             Map<Date,List<ProfilStatistique>> statistiqueMap = profilStatistiqueList
@@ -194,11 +200,14 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
             for(Map.Entry<Date,Map<String, List<ProfilStatistique>>> entry : statistiqueByProfilAndDate.entrySet()) {
                 for(Map.Entry<String,List<ProfilStatistique>> entry1 : entry.getValue().entrySet()) {
                     List<StatisticDataDTO> data = !CollectionUtils.isEmpty(dataByProfile.get(entry1.getKey())) ? dataByProfile.get(entry1.getKey()): new ArrayList<>();
-                    ProfilStatistique profilStatistiqueTemp = entry1.getValue().get(0);
+                    ProfilStatistique profilStatistiqueTemp = getProfilStatistiqueFromListByPredicate(
+                            entry1.getValue(),
+                            profilStatistique -> profilStatistique.getNombreFollowersTwitter()!=null
+                    );
                     if(profilStatistiqueTemp!=null) {
                         data.add(new StatisticDataDTO(
                                 profilStatistiqueTemp.getDateStatistique().toString(),
-                                profilStatistiqueTemp.getNombreFollowersInstagram()
+                                profilStatistiqueTemp.getNombreFollowersTwitter()
                         ));
                     }
                     dataByProfile.put(entry1.getKey(),data);
@@ -222,7 +231,7 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
         if(!CollectionUtils.isEmpty(profilStatistiqueList)) {
             // Sort data by date
             Comparator<ProfilStatistique> reverseComparator = (c1, c2) -> c2.getDateStatistique().compareTo(c1.getDateStatistique());
-            Collections.sort(profilStatistiqueList, reverseComparator);
+            profilStatistiqueList.sort(reverseComparator);
             // Préparation des données
             // 1- Groupe les données par date
             Map<Date,List<ProfilStatistique>> statistiqueMap = profilStatistiqueList
@@ -246,7 +255,10 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
             for(Map.Entry<Date,Map<String, List<ProfilStatistique>>> entry : statistiqueByProfilAndDate.entrySet()) {
                 for(Map.Entry<String,List<ProfilStatistique>> entry1 : entry.getValue().entrySet()) {
                     List<StatisticDataDTO> data = !CollectionUtils.isEmpty(dataByProfile.get(entry1.getKey())) ? dataByProfile.get(entry1.getKey()): new ArrayList<>();
-                    ProfilStatistique profilStatistiqueTemp = entry1.getValue().get(0);
+                    ProfilStatistique profilStatistiqueTemp = getProfilStatistiqueFromListByPredicate(
+                            entry1.getValue(),
+                            profilStatistique -> profilStatistique.getNombreFollowersInstagram()!=null
+                            );
                     if(profilStatistiqueTemp!=null) {
                         data.add(new StatisticDataDTO(
                                 profilStatistiqueTemp.getDateStatistique().toString(),
@@ -273,5 +285,13 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
                 .filter(predicate)
                 .collect(Collectors.toList());
         return !CollectionUtils.isEmpty(profilStatistiqueDTOListTemp) ? profilStatistiqueDTOListTemp.get(0) : null;
+    }
+
+    private static ProfilStatistique getProfilStatistiqueFromListByPredicate(List<ProfilStatistique> list, Predicate<ProfilStatistique> predicate) {
+        List<ProfilStatistique> profilStatistiqueList = list
+                .stream()
+                .filter(predicate)
+                .collect(Collectors.toList());
+        return !CollectionUtils.isEmpty(profilStatistiqueList) ? profilStatistiqueList.get(0) : null;
     }
 }
