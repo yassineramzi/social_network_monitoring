@@ -15,5 +15,5 @@ import java.util.List;
 @NoArgsConstructor
 public class StatisticSetDTO  implements Serializable {
     private String name;
-    private List<BigInteger> data;
+    private List<StatisticDataDTO> data;
 }

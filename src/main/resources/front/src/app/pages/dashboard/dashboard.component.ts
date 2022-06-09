@@ -1,6 +1,5 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild} from '@angular/core';
-import StatisticData from '@models/statisticData.model';
 import { ProfilStatistiqueService } from '@services/profilStatistique.service';
 import {
   ChartComponent,
@@ -12,6 +11,7 @@ import {
   ApexStroke,
   ApexResponsive
 } from "ng-apexcharts";
+import StatisticSet from '@models/statisticSet.model';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -193,13 +193,13 @@ export class DashBoardComponent implements OnInit {
         }
       ]
     };
-  }
+  }// https://codepen.io/apexcharts/pen/eVvjZx https://apexcharts.com/docs/series/
 
   public ngOnInit(): void {
     this.profilStatistiqueService.findAllYoutubeViewsStatisticSet().subscribe(
-      (response : HttpResponse<StatisticData>) => {
+      (response : HttpResponse<Array<StatisticSet>>) => {
         this.chartOptionsYoutubeViews = {
-          series: response.body.statisticSet,
+          series: response.body,
           chart: {
             height: 350,
             type: "area"
@@ -211,8 +211,7 @@ export class DashBoardComponent implements OnInit {
             curve: "smooth"
           },
           xaxis: {
-            type: "datetime",
-            categories: response.body.labels
+            type: "datetime"
           },
           tooltip: {
             x: {
@@ -240,9 +239,9 @@ export class DashBoardComponent implements OnInit {
     );
     // Instagram Followers
     this.profilStatistiqueService.findAllInstagramFollowersStatisticSet().subscribe(
-      (response : HttpResponse<StatisticData>) => {
+      (response : HttpResponse<Array<StatisticSet>>) => {
         this.chartOptionsInstagramFollowers = {
-          series: response.body.statisticSet,
+          series: response.body,
           chart: {
             height: 350,
             type: "area"
@@ -254,8 +253,7 @@ export class DashBoardComponent implements OnInit {
             curve: "smooth"
           },
           xaxis: {
-            type: "datetime",
-            categories: response.body.labels
+            type: "datetime"
           },
           tooltip: {
             x: {
@@ -282,9 +280,9 @@ export class DashBoardComponent implements OnInit {
     );
     // Youtube Subscribers
     this.profilStatistiqueService.findAllYoutubeSubscribersStatisticSet().subscribe(
-      (response : HttpResponse<StatisticData>) => {
+      (response : HttpResponse<Array<StatisticSet>>) => {
         this.chartOptionsYoutubeSubscribers = {
-          series: response.body.statisticSet,
+          series: response.body,
           chart: {
             height: 350,
             type: "area"
@@ -296,8 +294,7 @@ export class DashBoardComponent implements OnInit {
             curve: "smooth"
           },
           xaxis: {
-            type: "datetime",
-            categories: response.body.labels
+            type: "datetime"
           },
           tooltip: {
             x: {
@@ -324,9 +321,9 @@ export class DashBoardComponent implements OnInit {
     );
     // Twitter Followers
     this.profilStatistiqueService.findAllTwitterFollowersStatisticSet().subscribe(
-      (response : HttpResponse<StatisticData>) => {
+      (response : HttpResponse<Array<StatisticSet>>) => {
         this.chartOptionsTwitterFollowers = {
-          series: response.body.statisticSet,
+          series: response.body,
           chart: {
             height: 350,
             type: "area"
@@ -338,8 +335,7 @@ export class DashBoardComponent implements OnInit {
             curve: "smooth"
           },
           xaxis: {
-            type: "datetime",
-            categories: response.body.labels
+            type: "datetime"
           },
           tooltip: {
             x: {

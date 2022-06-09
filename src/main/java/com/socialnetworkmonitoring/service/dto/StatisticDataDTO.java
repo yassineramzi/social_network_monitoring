@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 
 @Getter
@@ -13,6 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StatisticDataDTO implements Serializable {
-    private List<String> labels;
-    private List<StatisticSetDTO> statisticSet;
+    private String x;
+    private BigInteger y;
 }

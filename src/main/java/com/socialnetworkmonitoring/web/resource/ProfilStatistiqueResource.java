@@ -2,7 +2,7 @@ package com.socialnetworkmonitoring.web.resource;
 
 import com.socialnetworkmonitoring.service.ProfilStatistiqueService;
 import com.socialnetworkmonitoring.service.dto.ProfilStatistiqueDTO;
-import com.socialnetworkmonitoring.service.dto.StatisticDataDTO;
+import com.socialnetworkmonitoring.service.dto.StatisticSetDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +18,9 @@ import java.util.List;
 @RequestMapping("/api/profil-statistique")
 public class ProfilStatistiqueResource {
 
-    private static final String ENTITY_NAME = "profilStatistiqueDTO";
-
     private final Logger log = LoggerFactory.getLogger(ProfilStatistiqueResource.class);
 
-    private ProfilStatistiqueService profilStatistiqueService;
+    private final ProfilStatistiqueService profilStatistiqueService;
 
     @Autowired
     public ProfilStatistiqueResource(ProfilStatistiqueService profilStatistiqueService) {
@@ -36,25 +34,25 @@ public class ProfilStatistiqueResource {
     }
 
     @GetMapping("/youtube/views")
-    public ResponseEntity<StatisticDataDTO> findAllYoutubeViewsStatisticSet(){
+    public ResponseEntity<List<StatisticSetDTO>> findAllYoutubeViewsStatisticSet(){
         log.info("Récupération de toutes les statistiques, des vues Youtube");
         return ResponseEntity.ok(this.profilStatistiqueService.findAllYoutubeViewsStatisticSet());
     }
 
     @GetMapping("/youtube/subscribers")
-    public ResponseEntity<StatisticDataDTO> findAllYoutubeSubscribersStatisticSet(){
+    public ResponseEntity<List<StatisticSetDTO>> findAllYoutubeSubscribersStatisticSet(){
         log.info("Récupération de toutes les statistiques, des abonnés Youtube");
         return ResponseEntity.ok(this.profilStatistiqueService.findAllYoutubeSubscribersStatisticSet());
     }
 
     @GetMapping("/twitter/followers")
-    public ResponseEntity<StatisticDataDTO> findAllTwitterFollowersStatisticSet(){
+    public ResponseEntity<List<StatisticSetDTO>> findAllTwitterFollowersStatisticSet(){
         log.info("Récupération de toutes les statistiques, des followers Twitter");
         return ResponseEntity.ok(this.profilStatistiqueService.findAllTwitterFollowersStatisticSet());
     }
 
     @GetMapping("/instagram/followers")
-    public ResponseEntity<StatisticDataDTO> findAllInstagramFollowersStatisticSet(){
+    public ResponseEntity<List<StatisticSetDTO>> findAllInstagramFollowersStatisticSet(){
         log.info("Récupération de toutes les statistiques, des followers Instagram");
         return ResponseEntity.ok(this.profilStatistiqueService.findAllInstagramFollowersStatisticSet());
     }
