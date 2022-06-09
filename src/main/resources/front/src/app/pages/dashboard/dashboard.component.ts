@@ -9,7 +9,8 @@ import {
   ApexXAxis,
   ApexDataLabels,
   ApexTooltip,
-  ApexStroke
+  ApexStroke,
+  ApexResponsive
 } from "ng-apexcharts";
 
 export type ChartOptions = {
@@ -19,6 +20,7 @@ export type ChartOptions = {
   stroke: ApexStroke;
   tooltip: ApexTooltip;
   dataLabels: ApexDataLabels;
+  responsive: Array<ApexResponsive>;
 };
 
 @Component({
@@ -60,7 +62,22 @@ export class DashBoardComponent implements OnInit {
         x: {
           format: "dd/MM/yy HH:mm"
         }
-      }
+      },
+      responsive: [
+        {
+          breakpoint: 1000,
+          options: {
+            plotOptions: {
+              bar: {
+                horizontal: false
+              }
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
     };
 
     this.chartOptionsYoutubeSubscribers = {
@@ -83,7 +100,22 @@ export class DashBoardComponent implements OnInit {
         x: {
           format: "dd/MM/yy HH:mm"
         }
-      }
+      },
+      responsive: [
+        {
+          breakpoint: 1000,
+          options: {
+            plotOptions: {
+              bar: {
+                horizontal: false
+              }
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
     };
 
     this.chartOptionsTwitterFollowers = {
@@ -106,7 +138,22 @@ export class DashBoardComponent implements OnInit {
         x: {
           format: "dd/MM/yy HH:mm"
         }
-      }
+      },
+      responsive: [
+        {
+          breakpoint: 1000,
+          options: {
+            plotOptions: {
+              bar: {
+                horizontal: false
+              }
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
     };
 
     this.chartOptionsInstagramFollowers = {
@@ -129,7 +176,22 @@ export class DashBoardComponent implements OnInit {
         x: {
           format: "dd/MM/yy HH:mm"
         }
-      }
+      },
+      responsive: [
+        {
+          breakpoint: 1000,
+          options: {
+            plotOptions: {
+              bar: {
+                horizontal: false
+              }
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
     };
   }
 
@@ -156,9 +218,25 @@ export class DashBoardComponent implements OnInit {
             x: {
               format: "dd/MM/yy HH:mm"
             }
-          }
+          },
+          responsive: [
+            {
+              breakpoint: 1000,
+              options: {
+                plotOptions: {
+                  bar: {
+                    horizontal: false
+                  }
+                },
+                legend: {
+                  position: "bottom"
+                }
+              }
+            }
+          ]
         };
-      }
+      },
+      
     );
     // Instagram Followers
     this.profilStatistiqueService.findAllInstagramFollowersStatisticSet().subscribe(
@@ -183,7 +261,22 @@ export class DashBoardComponent implements OnInit {
             x: {
               format: "dd/MM/yy HH:mm"
             }
-          }
+          },
+          responsive: [
+            {
+              breakpoint: 1000,
+              options: {
+                plotOptions: {
+                  bar: {
+                    horizontal: false
+                  }
+                },
+                legend: {
+                  position: "bottom"
+                }
+              }
+            }
+          ]
         };
       }
     );
@@ -210,7 +303,22 @@ export class DashBoardComponent implements OnInit {
             x: {
               format: "dd/MM/yy HH:mm"
             }
-          }
+          },
+          responsive: [
+            {
+              breakpoint: 1000,
+              options: {
+                plotOptions: {
+                  bar: {
+                    horizontal: false
+                  }
+                },
+                legend: {
+                  position: "bottom"
+                }
+              }
+            }
+          ]
         };
       }
     );
@@ -237,7 +345,22 @@ export class DashBoardComponent implements OnInit {
             x: {
               format: "dd/MM/yy HH:mm"
             }
-          }
+          },
+          responsive: [
+            {
+              breakpoint: 1000,
+              options: {
+                plotOptions: {
+                  bar: {
+                    horizontal: false
+                  }
+                },
+                legend: {
+                  position: "bottom"
+                }
+              }
+            }
+          ]
         };
       }
     );
