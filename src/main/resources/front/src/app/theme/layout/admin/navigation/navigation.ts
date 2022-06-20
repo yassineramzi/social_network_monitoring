@@ -55,6 +55,14 @@ const NavigationItems = [
         url: '/profils-page',
         classes: 'nav-item',
         icon: 'feather icon-user',
+      },
+      {
+        id: 'societes-page',
+        title: 'Societes',
+        type: 'item',
+        url: '/societes-page',
+        classes: 'nav-item',
+        icon: 'feather icon-briefcase',
       }
     ]
   }

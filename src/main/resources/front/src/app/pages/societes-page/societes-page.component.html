@@ -1,0 +1,54 @@
+<app-card>
+    <div class="row p-2">
+      <div class="col-md-12">
+        <button class="btn btn-primary float-right" (click)="openModal()">
+          Ajouter une société
+        </button>
+      </div>
+    </div>
+    <div class="row p-2">
+      <div class="col-md-12">
+          <div class="table-responsive">
+            <table id="table" class="table table-centered table-hover mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">
+                    <span class="d-flex justify-content-center">Nom</span>
+                  </th>
+                  <th scope="col">
+                    <span class="d-flex justify-content-center">Actions</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="societesArrayPage.length === 0">
+                  <td colspan="2">
+                    <span class="d-flex justify-content-center">Aucune societe disponible</span>
+                  </td>
+                </tr>
+                <tr *ngFor="let societe of societesArrayPage">
+                  <td>
+                    <span class="d-flex justify-content-center"><a [routerLink]="['/societes-statistiques-page', societe.id, 'societe']">{{societe.nom}}</a></span>
+                  </td>
+                  <td>
+                    <span class="d-flex justify-content-center">
+                      <i class="feather icon-edit-2 mr-1" (click)="editSociete(societe.id)"></i>
+                      <i class="feather icon-trash-2" (click)="deleteSociete(societe.id)"></i>
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="d-flex justify-content-between p-2" [formGroup]="paginationForm">
+              <ngb-pagination [collectionSize]="societesCollectionSize" [(page)]="societesPage" [pageSize]="pageSize" (pageChange)="refreshSocietes()">
+              </ngb-pagination>
+              <select class="custom-select" style="width: auto" formControlName="pageSize" (change)="refreshSocietes()">
+                <option [ngValue]="2">2 résultats par page</option>
+                <option [ngValue]="4">4 résultats par page</option>
+                <option [ngValue]="6">6 résultats par page</option>
+              </select>
+            </div> 
+          </div>
+      </div>
+    </div>
+</app-card>

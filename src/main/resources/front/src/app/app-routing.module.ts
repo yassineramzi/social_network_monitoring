@@ -43,6 +43,10 @@ const routes: Routes = [
       {
         path: 'dashboard-page',
         loadChildren: () => import('@pages/dashboard/dashboard.module').then(module => module.DashBoardModule)
+      },
+      {
+        path: 'societes-page',
+        loadChildren: () => import('@pages/societes-page/societes-page.module').then(module => module.SocietesPageModule)
       }
     ]
   }
