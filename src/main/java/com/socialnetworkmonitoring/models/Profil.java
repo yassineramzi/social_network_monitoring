@@ -8,12 +8,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@ToString
-@EqualsAndHashCode
 @DynamicUpdate
 @Table(name = "profil")
 public class Profil implements Serializable {

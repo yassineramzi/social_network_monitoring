@@ -32,7 +32,7 @@ public class ProfilStatistiqueServiceImpl implements ProfilStatistiqueService {
 
     @Override
     public List<ProfilStatistiqueDTO> findProfilStatistiquesByIdProfil(Long idProfil) {
-        Map<Date,List<ProfilStatistiqueDTO>> statistiqueDTOMap = this.profilStatistiqueRepository.findByProfilId(idProfil).parallelStream().map(
+        Map<Date,List<ProfilStatistiqueDTO>> statistiqueDTOMap = this.profilStatistiqueRepository.findByProfilId(idProfil).stream().map(
                 this.profilStatistiqueMapper::toDto
         ).collect(            groupingBy(
                 ProfilStatistiqueDTO::getDateStatistique

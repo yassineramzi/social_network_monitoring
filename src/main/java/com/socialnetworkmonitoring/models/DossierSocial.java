@@ -8,12 +8,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@ToString
-@EqualsAndHashCode
 @Table(name = "dossier_social")
 public class DossierSocial implements Serializable {
 
