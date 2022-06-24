@@ -47,6 +47,10 @@ const routes: Routes = [
       {
         path: 'societes-page',
         loadChildren: () => import('@pages/societes-page/societes-page.module').then(module => module.SocietesPageModule)
+      },
+      {
+        path: 'societes-statistiques-page',
+        loadChildren: () => import('@pages/societes-statistiques-page/societes-statistiques-page.module').then(module => module.SocietesStatistiquesPageModule)
       }
     ]
   }
