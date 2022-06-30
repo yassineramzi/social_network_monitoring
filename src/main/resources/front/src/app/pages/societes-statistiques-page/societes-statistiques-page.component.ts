@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import SocieteStatistique from '@models/societeStatistique.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import SocieteService from '@services/societe.service';
 import { ToastrService } from 'ngx-toastr';
+import { AjoutSocieteStatistiqueModalComponent } from './ajout-societe-statistique-modal/ajout-societe-statistique-modal.component';
+import SocieteStatistique from '@models/societeStatistique.model';
+import {SocieteStatistiquesService} from '@services/societeStatistique.service';
+import { ActivatedRoute } from '@angular/router';
+import { forkJoin } from 'rxjs';
+import { SocieteService } from '@services/societe.service';
+import { HttpResponse } from '@angular/common/http';
+import Societe from '@models/societe.model';
 
 @Component({
   selector: 'app-societes-statistiques-page',
@@ -20,37 +26,64 @@ export class SocietesStatistiquesPageComponent implements OnInit {
 
   public societesStatistiquesArrayPage: Array<SocieteStatistique> = [];
 
-  public societesPage: number = 1;
+  public societesStatistiquesPage: number = 1;
 
-  public societesCollectionSize: number = 0;
+  public societesStatistiquesCollectionSize: number = 0;
 
   public pageSize: number;
 
+  public societe: Societe;
+
   private societesStatistiquesArray: Array<SocieteStatistique> = [];
+
+  private idSociete: number;
 
   constructor(
     protected formBuilder: FormBuilder,
     protected modalService: NgbModal,
     protected toastService: ToastrService,
-    protected societeStatistiqueService: SocieteService
+    protected societeService: SocieteService,
+    protected societeStatistiqueService: SocieteStatistiquesService,
+    protected activatedRoute : ActivatedRoute
     ) { }
+
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe(
+      (params) => {
+        if( params ['idSociete'] )
+        {
+          this.idSociete = params ['idSociete'];
+          forkJoin([
+            this.societeService.findById(this.idSociete),
+            this.societeStatistiqueService.findByIdSociete(this.idSociete)
+          ]).subscribe(
+            (results: any) => {
+              this._onSocieteSuccess(results[0]);
+              this._onSocieteStatistiquesSuccess(results[1]);
+            }
+          );
+        }
+      }
+    );
+  }
 
   public refreshSocietesStatistiques(): void {
     this.pageSize = this.pageSizeFormControl.value;
     this.societesStatistiquesArrayPage = this.societesStatistiquesArray
-      .slice((this.societesPage - 1) * this.pageSize, (this.societesPage - 1) * this.pageSize + this.pageSize);
-    this.societesCollectionSize = this.societesStatistiquesArray.length;
+      .slice((this.societesStatistiquesPage - 1) * this.pageSize, (this.societesStatistiquesPage - 1) * this.pageSize + this.pageSize);
+    this.societesStatistiquesCollectionSize = this.societesStatistiquesArray.length;
   }
 
   public openModal(): void {
-    /*const modalRef = this.modalService.open(AjoutSocietesModalComponent, {size: 'md'});
+    const modalRef = this.modalService.open(AjoutSocieteStatistiqueModalComponent, {size: 'md'});
+    modalRef.componentInstance.idSociete = this.idSociete;
     modalRef.result.then(
       (result: SocieteStatistique) => {
         if (result) {
           this.addSocieteStatistique(result);
         }
       }
-    );*/
+    );
   }
 
   public get pageSizeFormControl(): FormControl {
@@ -58,7 +91,7 @@ export class SocietesStatistiquesPageComponent implements OnInit {
   }
 
   private addSocieteStatistique(societeStatistique: SocieteStatistique): void {
-    let index: number = this.societesStatistiquesArray.findIndex( societeStatistiqueTemp => {
+    const index: number = this.societesStatistiquesArray.findIndex( societeStatistiqueTemp => {
       return societeStatistiqueTemp.id === societeStatistique.id;
     });
     if(index === -1){
@@ -70,4 +103,12 @@ export class SocietesStatistiquesPageComponent implements OnInit {
     this.refreshSocietesStatistiques();
   }
 
+  private _onSocieteSuccess(response: HttpResponse<Societe>): void {
+    this.societe = response.body;
+  }
+
+  private _onSocieteStatistiquesSuccess(response: HttpResponse<SocieteStatistique[]>): void {
+    this.societesStatistiquesArray = response.body || [];
+    this.refreshSocietesStatistiques();
+  }
 }

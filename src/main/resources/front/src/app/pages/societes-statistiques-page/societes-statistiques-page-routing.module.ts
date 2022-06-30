@@ -4,7 +4,7 @@ import { AuthGuard } from '@services/auth.guard';
 import { SocietesStatistiquesPageComponent } from './societes-statistiques-page.component';
 const routes: Routes = [
   {
-    path: '',
+    path: ':idSociete/societe',
     component: SocietesStatistiquesPageComponent,
     canActivate: [AuthGuard], 
     data: { roles: ['ROLE_ADMIN'] }

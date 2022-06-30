@@ -8,13 +8,13 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @ToString
-@EqualsAndHashCode
 @DynamicUpdate
+@Getter
+@Setter
 @Table(name = "profil_statistique")
 public class ProfilStatistique implements Serializable {
 

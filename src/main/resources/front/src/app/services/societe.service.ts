@@ -11,7 +11,7 @@ type EntityArrayResponseType = HttpResponse<Societe[]>;
 @Injectable({
     providedIn: 'root'
 })
-export default class SocieteService {
+export class SocieteService {
 
     public resourceUrl = environment.api_url + 'api/societe';
 
@@ -24,7 +24,7 @@ export default class SocieteService {
         return this.http.post<Societe>(this.resourceUrl + '/create', societe, {observe: 'response'});
     }
 
-    findAll(id: number): Observable<EntityArrayResponseType> {
+    findAll(): Observable<EntityArrayResponseType> {
         return this.http.get<Societe[]>(`${this.resourceUrl}/all`, {observe: 'response'});
     }
 

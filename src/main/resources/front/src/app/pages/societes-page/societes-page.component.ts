@@ -1,9 +1,10 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import Societe from '@models/societe.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationPopupService } from '@services/confirmationPopup.service';
-import SocieteService from '@services/societe.service';
+import { SocieteService } from '@services/societe.service';
 import { ToastrService } from 'ngx-toastr';
 import { AjoutSocietesModalComponent } from './ajout-societes-modal/ajout-societes-modal.component';
 
@@ -12,7 +13,7 @@ import { AjoutSocietesModalComponent } from './ajout-societes-modal/ajout-societ
   templateUrl: './societes-page.component.html',
   styleUrls: ['./societes-page.component.scss']
 })
-export class SocietesPageComponent {
+export class SocietesPageComponent implements OnInit {
   public paginationForm: FormGroup = this.formBuilder.group(
     {
       pageSize : new FormControl(6)
@@ -36,6 +37,15 @@ export class SocietesPageComponent {
     protected toastService: ToastrService,
     protected societeService: SocieteService
     ) { }
+  
+  ngOnInit(): void {
+    this.societeService.findAll().subscribe(
+      (response: HttpResponse<Societe[]>) => {
+        this.societesArray = response.body;
+        this.refreshSocietes();
+      }
+    );
+  }
 
   public refreshSocietes(): void {
     this.pageSize = this.pageSizeFormControl.value;

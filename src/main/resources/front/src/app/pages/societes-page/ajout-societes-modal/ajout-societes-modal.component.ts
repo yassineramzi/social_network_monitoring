@@ -5,7 +5,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
 import Societe from '@models/societe.model';
-import SocieteService from '@services/societe.service';
+import { SocieteService } from '@services/societe.service';
 
 @Component({
   selector: 'app-ajout-societes-modal',

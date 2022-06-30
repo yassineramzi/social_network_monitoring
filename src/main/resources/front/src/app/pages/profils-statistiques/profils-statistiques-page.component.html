@@ -35,7 +35,7 @@
                     </tr>
                     <tr *ngFor="let profilStatistique of profilsStatistiquesArrayPage">
                       <td>
-                        <span class="d-flex justify-content-center">{{profilStatistique.dateStatistique | date:'MM/dd/yyyy'}}</span>
+                        <span class="d-flex justify-content-center">{{profilStatistique.dateStatistique | date:'dd/MM/yyyy'}}</span>
                       </td>
                       <td>
                         <span class="d-flex justify-content-center">{{profilStatistique.nombreFollowersTwitter}}</span>
