@@ -7,6 +7,7 @@ import com.socialnetworkmonitoring.service.mapper.SocieteStatistiqueMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +29,7 @@ public class SocieteStatistiqueServiceImpl implements SocieteStatistiqueService 
 
     @Override
     public SocieteStatistiqueDTO create(SocieteStatistiqueDTO societeStatistiqueDTO){
+        societeStatistiqueDTO.setDateStatistique(new Date());
         return societeStatistiqueMapper.toDto(this.societeStatistiqueRepository.save(
                 this.societeStatistiqueMapper.toEntity(societeStatistiqueDTO)
         ));

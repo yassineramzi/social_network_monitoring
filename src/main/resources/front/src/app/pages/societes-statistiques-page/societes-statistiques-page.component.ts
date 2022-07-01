@@ -32,7 +32,7 @@ export class SocietesStatistiquesPageComponent implements OnInit {
 
   public pageSize: number;
 
-  public societe: Societe;
+  public societe: Societe = new Societe();
 
   private societesStatistiquesArray: Array<SocieteStatistique> = [];
 
