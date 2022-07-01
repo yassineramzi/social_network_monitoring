@@ -11,7 +11,7 @@ import StatisticSet from '@models/statisticSet.model';
 })
 export class ProfilStatistiqueService {
 
-    public resourceUrl = environment.api_url + 'api/profil-statistique';
+    private resourceUrl = environment.api_url + 'api/profil-statistique';
 
     constructor(
         protected http: HttpClient

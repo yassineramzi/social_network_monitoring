@@ -13,7 +13,7 @@ type EntityArrayResponseType = HttpResponse<Profil[]>;
 })
 export class ProfilService {
 
-    public resourceUrl = environment.api_url + 'api/profil';
+    private resourceUrl = environment.api_url + 'api/profil';
 
     constructor(
         protected http: HttpClient

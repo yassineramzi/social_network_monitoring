@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.List;
 
 @Getter
 @Setter

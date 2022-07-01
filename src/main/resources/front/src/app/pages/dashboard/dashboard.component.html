@@ -60,3 +60,33 @@
     </app-card>
   </div>
 </div>
+<div class="row">
+  <div class="col-xl-6 col-md-12">
+    <app-card cardTitle="Prix Gazoil" [options]="false">
+      <div id="chart-prix-gazoil">
+        <apx-chart
+          [series]="chartOptionsPrixGazoil.series"
+          [chart]="chartOptionsPrixGazoil.chart"
+          [xaxis]="chartOptionsPrixGazoil.xaxis"
+          [stroke]="chartOptionsPrixGazoil.stroke"
+          [tooltip]="chartOptionsPrixGazoil.tooltip"
+          [dataLabels]="chartOptionsPrixGazoil.dataLabels"
+        ></apx-chart>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-6 col-md-12">
+    <app-card cardTitle="Prix Essence"  [options]="false">
+      <div id="chart-prix-essence">
+        <apx-chart
+          [series]="chartOptionsPrixEssence.series"
+          [chart]="chartOptionsPrixEssence.chart"
+          [xaxis]="chartOptionsPrixEssence.xaxis"
+          [stroke]="chartOptionsPrixEssence.stroke"
+          [tooltip]="chartOptionsPrixEssence.tooltip"
+          [dataLabels]="chartOptionsPrixEssence.dataLabels"
+        ></apx-chart>
+      </div>
+    </app-card>
+  </div>
+</div>

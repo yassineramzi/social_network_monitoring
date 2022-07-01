@@ -2,6 +2,7 @@ package com.socialnetworkmonitoring.web.resource;
 
 import com.socialnetworkmonitoring.service.SocieteStatistiqueService;
 import com.socialnetworkmonitoring.service.dto.SocieteStatistiqueDTO;
+import com.socialnetworkmonitoring.service.dto.StatisticSetDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -30,5 +31,17 @@ public class SocieteStatistiqueResource {
     public ResponseEntity<List<SocieteStatistiqueDTO>> findByProfilId(@PathVariable("idSociete") Long idSociete) {
         log.info("Récupération de toutes les statistiques, de la société : {}", idSociete);
         return ResponseEntity.ok(this.societeStatistiqueService.findSocieteStatistiquesByIdSociete(idSociete));
+    }
+
+    @GetMapping("/gazoil-statistics")
+    public ResponseEntity<List<StatisticSetDTO>> findAllGazoilStatisticSet(){
+        log.info("Récupération de toutes les statistiques, du Gazoil");
+        return ResponseEntity.ok(this.societeStatistiqueService.findAllGazoilStatisticSet());
+    }
+
+    @GetMapping("/essence-statistics")
+    public ResponseEntity<List<StatisticSetDTO>> findAllEssenceStatisticSet(){
+        log.info("Récupération de toutes les statistiques, de l'Essence");
+        return ResponseEntity.ok(this.societeStatistiqueService.findAllEssenceStatisticSet());
     }
 }

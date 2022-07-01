@@ -12,6 +12,7 @@ import {
   ApexResponsive
 } from "ng-apexcharts";
 import StatisticSet from '@models/statisticSet.model';
+import { SocieteStatistiquesService } from '@services/societeStatistique.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -40,8 +41,17 @@ export class DashBoardComponent implements OnInit {
 
   @ViewChild("chart-instagram-followers") chartInstagramFollowers: ChartComponent;
   public chartOptionsInstagramFollowers: Partial<ChartOptions>;
+  
+  @ViewChild("chart-prix-gazoil") chartPrixGazoil: ChartComponent;
+  public chartOptionsPrixGazoil: Partial<ChartOptions>;
 
-  public constructor(protected profilStatistiqueService: ProfilStatistiqueService){
+  @ViewChild("chart-prix-essence") chartPrixEssence: ChartComponent;
+  public chartOptionsPrixEssence: Partial<ChartOptions>;
+
+  public constructor(
+    protected profilStatistiqueService: ProfilStatistiqueService,
+    protected societeStatistiqueService: SocieteStatistiquesService
+    ){
     this.chartOptionsYoutubeViews = {
       series: [
       ],
@@ -193,7 +203,83 @@ export class DashBoardComponent implements OnInit {
         }
       ]
     };
-  }// https://codepen.io/apexcharts/pen/eVvjZx https://apexcharts.com/docs/series/
+
+    this.chartOptionsPrixGazoil = {
+      series: [
+      ],
+      chart: {
+        height: 350,
+        type: "area"
+      },
+      dataLabels: {
+        enabled: true
+      },
+      stroke: {
+        curve: "smooth"
+      },
+      xaxis: {
+        type: "datetime"
+      },
+      tooltip: {
+        x: {
+          format: "dd/MM/yy HH:mm"
+        }
+      },
+      responsive: [
+        {
+          breakpoint: 1000,
+          options: {
+            plotOptions: {
+              bar: {
+                horizontal: false
+              }
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
+    };
+
+    this.chartOptionsPrixEssence = {
+      series: [
+      ],
+      chart: {
+        height: 350,
+        type: "area"
+      },
+      dataLabels: {
+        enabled: true
+      },
+      stroke: {
+        curve: "smooth"
+      },
+      xaxis: {
+        type: "datetime"
+      },
+      tooltip: {
+        x: {
+          format: "dd/MM/yy HH:mm"
+        }
+      },
+      responsive: [
+        {
+          breakpoint: 1000,
+          options: {
+            plotOptions: {
+              bar: {
+                horizontal: false
+              }
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
+    };
+  }
 
   public ngOnInit(): void {
     this.profilStatistiqueService.findAllYoutubeViewsStatisticSet().subscribe(
@@ -360,6 +446,88 @@ export class DashBoardComponent implements OnInit {
         };
       }
     );
+    // Statistiques Gazoil
+    this.societeStatistiqueService.findAllGazoilStatisticSet().subscribe(
+      (response : HttpResponse<Array<StatisticSet>>) => {
+        this.chartOptionsPrixGazoil = {
+          series: response.body,
+          chart: {
+            height: 350,
+            type: "area"
+          },
+          dataLabels: {
+            enabled: false
+          },
+          stroke: {
+            curve: "smooth"
+          },
+          xaxis: {
+            type: "datetime"
+          },
+          tooltip: {
+            x: {
+              format: "dd/MM/yy HH:mm"
+            }
+          },
+          responsive: [
+            {
+              breakpoint: 1000,
+              options: {
+                plotOptions: {
+                  bar: {
+                    horizontal: false
+                  }
+                },
+                legend: {
+                  position: "bottom"
+                }
+              }
+            }
+          ]
+        };
+      }
+    );
+    // Prix Essence
+    this.societeStatistiqueService.findAllEssenceStatisticSet().subscribe(
+      (response : HttpResponse<Array<StatisticSet>>) => {
+        this.chartOptionsPrixEssence = {
+          series: response.body,
+          chart: {
+            height: 350,
+            type: "area"
+          },
+          dataLabels: {
+            enabled: false
+          },
+          stroke: {
+            curve: "smooth"
+          },
+          xaxis: {
+            type: "datetime"
+          },
+          tooltip: {
+            x: {
+              format: "dd/MM/yy HH:mm"
+            }
+          },
+          responsive: [
+            {
+              breakpoint: 1000,
+              options: {
+                plotOptions: {
+                  bar: {
+                    horizontal: false
+                  }
+                },
+                legend: {
+                  position: "bottom"
+                }
+              }
+            }
+          ]
+        };
+      }
+    )
   }
 
 }

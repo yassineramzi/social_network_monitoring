@@ -14,7 +14,7 @@ type EntityResponseType = HttpResponse<JwtResponse>;
   providedIn: 'root'
 })
 export class AuthService {
-  public resourceUrl = environment.api_url + 'api/auth';
+  private resourceUrl = environment.api_url + 'api/auth';
 
   constructor(
     protected http: HttpClient,

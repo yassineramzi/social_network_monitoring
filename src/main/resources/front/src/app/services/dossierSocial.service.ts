@@ -13,7 +13,7 @@ type EntityArrayResponseType = HttpResponse<DossierSocial[]>;
 })
 export class DossierSocialService {
 
-    public resourceUrl = environment.api_url + 'api/dossier';
+    private resourceUrl = environment.api_url + 'api/dossier';
 
     constructor(
         protected http: HttpClient
